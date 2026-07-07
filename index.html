@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МурГав — Дашборд лежанок 80×60</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg:     #0d0d14;
+    --card:   #14141f;
+    --border: #1e1e2e;
+    --accent: #f59e0b;
+    --amber2: #fbbf24;
+    --text:   #e2e8f0;
+    --muted:  #64748b;
+    --green:  #22c55e;
+    --yellow: #eab308;
+    --red:    #ef4444;
+    --blue:   #3b82f6;
+    --purple: #a855f7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, sans-serif; padding: 20px; }
+
+  /* Header */
+  .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+  .header h1 { font-size: 22px; font-weight: 700; color: var(--accent); }
+  .header h1 span { color: var(--text); font-weight: 400; font-size: 16px; margin-left: 8px; }
+  .meta { font-size: 12px; color: var(--muted); text-align: right; line-height: 1.6; }
+  .badge { display: inline-block; background: var(--accent); color: #000; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+
+  /* Period toggle */
+  .period-toggle { display: flex; gap: 8px; margin-bottom: 20px; }
+  .period-btn {
+    padding: 8px 20px; border-radius: 8px; border: 1px solid var(--border);
+    background: var(--card); color: var(--muted); cursor: pointer; font-size: 14px; transition: all .2s;
+  }
+  .period-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+
+  /* Grid layouts */
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 900px) {
+    .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 500px) {
+    .grid-4, .grid-3 { grid-template-columns: 1fr; }
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .card-title { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 8px; }
+  .card-value { font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+  .card-sub   { font-size: 13px; color: var(--muted); }
+  .card-target { font-size: 11px; margin-top: 6px; }
+
+  /* Summary cards accent color */
+  .card.accent-green .card-value { color: var(--green); }
+  .card.accent-amber .card-value { color: var(--accent); }
+  .card.accent-red   .card-value { color: var(--red); }
+  .card.accent-blue  .card-value { color: var(--blue); }
+
+  /* Section headers */
+  .section-title { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase;
+                   letter-spacing: .8px; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Chart wrapper */
+  .chart-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+  .chart-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 16px; }
+  .chart-wrap { height: 220px; position: relative; }
+
+  /* Color breakdown */
+  .color-block { display: flex; flex-direction: column; gap: 10px; }
+  .color-row { display: flex; align-items: center; gap: 10px; }
+  .color-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .color-label { flex: 1; font-size: 14px; }
+  .color-bar-wrap { flex: 2; background: var(--border); border-radius: 4px; height: 8px; overflow: hidden; }
+  .color-bar { height: 100%; border-radius: 4px; transition: width .5s; }
+  .color-val { font-size: 14px; font-weight: 600; min-width: 40px; text-align: right; }
+
+  /* Stocks table */
+  .stocks-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .stocks-table th { text-align: left; color: var(--muted); font-weight: 500; padding: 6px 10px; font-size: 11px; text-transform: uppercase; }
+  .stocks-table td { padding: 10px 10px; border-top: 1px solid var(--border); }
+  .stock-qty { font-weight: 700; font-size: 16px; }
+  .qty-green  { color: var(--green); }
+  .qty-yellow { color: var(--yellow); }
+  .qty-red    { color: var(--red); }
+
+  /* Ads block */
+  .ads-platform { display: flex; flex-direction: column; gap: 10px; }
+  .ads-title { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+  .ads-spend  { font-size: 24px; font-weight: 700; color: var(--accent); }
+  .drr-chip {
+    display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 13px; font-weight: 700;
+    margin-top: 4px; margin-bottom: 8px;
+  }
+  .drr-good   { background: rgba(34,197,94,.15); color: var(--green); }
+  .drr-warn   { background: rgba(234,179,8,.15);  color: var(--yellow); }
+  .drr-bad    { background: rgba(239,68,68,.15);  color: var(--red); }
+  .drr-none   { background: var(--border); color: var(--muted); }
+  .camps-list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+  .camps-list li { font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 6px; }
+  .camps-list li span { color: var(--text); font-weight: 600; }
+
+  /* Loading / error */
+  #loader { text-align: center; padding: 60px 0; color: var(--muted); font-size: 16px; }
+  #err    { display: none; background: rgba(239,68,68,.1); border: 1px solid var(--red); border-radius: 10px;
+            padding: 16px 20px; color: var(--red); margin-bottom: 20px; font-size: 14px; }
+
+  /* Refresh */
+  .last-update { font-size: 12px; color: var(--muted); }
+
+  /* Divider in ads */
+  .ads-divider { width: 1px; background: var(--border); margin: 0 10px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>МурГав <span>· лежанки 80×60</span></h1>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px;">
+      Только SKU 80×60 · Графит / Серый / Коричневый
+    </div>
+  </div>
+  <div class="meta">
+    <div class="last-update" id="lastUpdate">Загрузка…</div>
+    <div style="margin-top:4px;"><span class="badge">LIVE</span> · обновление каждые 2 часа</div>
+  </div>
+</div>
+
+<div id="err"></div>
+<div id="loader">⏳ Загрузка данных…</div>
+
+<div id="dashboard" style="display:none">
+
+  <!-- Period toggle -->
+  <div class="period-toggle">
+    <button class="period-btn active" onclick="setPeriod('7d')">7 дней</button>
+    <button class="period-btn" onclick="setPeriod('30d')">30 дней</button>
+  </div>
+
+  <!-- Block 1: Summary cards -->
+  <div class="grid-4">
+    <div class="card accent-green">
+      <div class="card-title">Заказы — Ozon</div>
+      <div class="card-value" id="c-ozon-orders">—</div>
+      <div class="card-sub">шт за период</div>
+    </div>
+    <div class="card accent-green">
+      <div class="card-title">Выручка — Ozon</div>
+      <div class="card-value" id="c-ozon-rev">—</div>
+      <div class="card-sub">₽ за период</div>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-title">Заказы — WB</div>
+      <div class="card-value" id="c-wb-orders">—</div>
+      <div class="card-sub">шт за период</div>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-title">Выручка — WB</div>
+      <div class="card-value" id="c-wb-rev">—</div>
+      <div class="card-sub">₽ за период</div>
+    </div>
+  </div>
+
+  <!-- Block 2: Chart -->
+  <div class="section-title">Динамика продаж</div>
+  <div class="chart-card">
+    <h3>Заказы по дням</h3>
+    <div class="chart-wrap">
+      <canvas id="salesChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Block 3: Color breakdown -->
+  <div class="section-title">Разбивка по цветам</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Ozon — цвета</div>
+      <div class="color-block" id="ozon-colors"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">WB — цвета</div>
+      <div class="color-block" id="wb-colors"></div>
+    </div>
+  </div>
+
+  <!-- Block 4: Stocks -->
+  <div class="section-title">Остатки на складах</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Ozon FBO · 80×60</div>
+      <table class="stocks-table" id="ozon-stocks"></table>
+    </div>
+    <div class="card">
+      <div class="card-title">WB FBO · 80×60</div>
+      <table class="stocks-table" id="wb-stocks"></table>
+    </div>
+  </div>
+
+  <!-- Block 5: Advertising -->
+  <div class="section-title">Реклама и ДРР</div>
+  <div class="grid-2">
+
+    <!-- Ozon Performance -->
+    <div class="card">
+      <div class="ads-platform">
+        <div class="ads-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#005BFF"><circle cx="12" cy="12" r="12"/></svg>
+          Ozon Performance
+        </div>
+        <div class="ads-spend" id="ozon-ads-spend">—</div>
+        <div id="ozon-drr-chip" class="drr-chip drr-none">ДРР —</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Цель: ≤ 15%</div>
+        <ul class="camps-list" id="ozon-camps"></ul>
+      </div>
+    </div>
+
+    <!-- WB Ads -->
+    <div class="card">
+      <div class="ads-platform">
+        <div class="ads-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#CB11AB"><circle cx="12" cy="12" r="12"/></svg>
+          WB Реклама
+        </div>
+        <div class="ads-spend" id="wb-ads-spend">—</div>
+        <div id="wb-drr-chip" class="drr-chip drr-none">ДРР —</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Цель: ≤ 15%</div>
+        <ul class="camps-list" id="wb-camps"></ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /dashboard -->
+
+<script>
+// ─── State ────────────────────────────────────────────────────────────────────
+let DATA    = null;
+let PERIOD  = '7d';
+let CHART   = null;
+
+// ─── Fetch data.json ──────────────────────────────────────────────────────────
+async function loadData() {
+  try {
+    const r = await fetch('data.json?t=' + Date.now());
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    DATA = await r.json();
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('err').style.display = 'none';
+    renderAll();
+    document.getElementById('lastUpdate').textContent =
+      'Обновлено: ' + new Date(DATA.updated_at).toLocaleString('ru-RU', {hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'});
+  } catch(e) {
+    document.getElementById('loader').style.display = 'none';
+    const el = document.getElementById('err');
+    el.style.display = 'block';
+    el.textContent = '⚠️ Не удалось загрузить данные: ' + e.message;
+  }
+}
+
+// ─── Period toggle ────────────────────────────────────────────────────────────
+function setPeriod(p) {
+  PERIOD = p;
+  document.querySelectorAll('.period-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.startsWith(p === '7d' ? '7' : '30'));
+  });
+  if (DATA) renderAll();
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+const fmt = n => n == null ? '—' : n.toLocaleString('ru-RU');
+const fmtR = n => n == null ? '—' : Math.round(n).toLocaleString('ru-RU') + ' ₽';
+const fmtK = n => n >= 1000 ? (n/1000).toFixed(0)+'к' : String(n);
+
+function qtyColor(n) {
+  if (n > 50) return 'qty-green';
+  if (n > 20) return 'qty-yellow';
+  return 'qty-red';
+}
+
+function drrChip(drr) {
+  if (drr == null) return ['drr-none', 'ДРР —'];
+  const cls = drr <= 15 ? 'drr-good' : drr <= 20 ? 'drr-warn' : 'drr-bad';
+  return [cls, `ДРР ${drr}%`];
+}
+
+const COLOR_LABEL  = { graphite: 'Графит', grey: 'Серый', brown: 'Коричневый', other: 'Другие' };
+const COLOR_DOT    = { graphite: '#6b7280', grey: '#94a3b8', brown: '#92400e', other: '#475569' };
+const COLOR_BAR    = { graphite: '#9ca3af', grey: '#cbd5e1', brown: '#b45309', other: '#64748b' };
+
+// ─── Render all blocks ────────────────────────────────────────────────────────
+function renderAll() {
+  const d = DATA;
+  const p = PERIOD;
+  const oz = d.ozon[p];
+  const wb = d.wb[p];
+
+  // Block 1 — summary cards
+  document.getElementById('c-ozon-orders').textContent = fmt(oz.orders);
+  document.getElementById('c-ozon-rev').textContent    = fmtR(oz.revenue);
+  document.getElementById('c-wb-orders').textContent   = fmt(wb.orders);
+  document.getElementById('c-wb-rev').textContent      = fmtR(wb.revenue);
+
+  // Block 2 — chart
+  renderChart(oz.daily, wb.daily);
+
+  // Block 3 — colors
+  renderColors('ozon-colors', oz.by_color, oz.orders);
+  renderColors('wb-colors',   wb.by_color, wb.orders);
+
+  // Block 4 — stocks
+  renderStocks('ozon-stocks', d.ozon.stocks);
+  renderStocks('wb-stocks',   d.wb.stocks);
+
+  // Block 5 — ads
+  const ozAds = d.ozon.ads[p];
+  const wbAds = d.wb.ads[p];
+  document.getElementById('ozon-ads-spend').textContent = fmtR(ozAds.spend);
+  document.getElementById('wb-ads-spend').textContent   = fmtR(wbAds.spend);
+
+  const [ozDrrCls, ozDrrTxt] = drrChip(ozAds.drr_pct);
+  const [wbDrrCls, wbDrrTxt] = drrChip(wbAds.drr_pct);
+  const ozChip = document.getElementById('ozon-drr-chip');
+  const wbChip = document.getElementById('wb-drr-chip');
+  ozChip.className = 'drr-chip ' + ozDrrCls; ozChip.textContent = ozDrrTxt;
+  wbChip.className = 'drr-chip ' + wbDrrCls; wbChip.textContent = wbDrrTxt;
+
+  renderCamps('ozon-camps', ozAds.campaigns, 'spend');
+  renderCamps('wb-camps',   wbAds.campaigns, 'spend');
+}
+
+// ─── Chart ────────────────────────────────────────────────────────────────────
+function buildChartData(daily) {
+  const sorted = Object.keys(daily).sort();
+  return {
+    labels: sorted.map(d => d.slice(5)),
+    data:   sorted.map(d => daily[d]?.orders || 0),
+  };
+}
+
+function renderChart(ozDailyRaw, wbDailyRaw) {
+  const oz = buildChartData(ozDailyRaw || {});
+  const wb = buildChartData(wbDailyRaw || {});
+
+  // Merge labels
+  const allLabels = [...new Set([...oz.labels, ...wb.labels])].sort();
+  const labelMap = l => (idx => idx >= 0 ? idx : null);
+  const reindex = (orig, allLbls) =>
+    allLbls.map(l => { const i = orig.labels.indexOf(l); return i >= 0 ? orig.data[i] : 0; });
+
+  const ozData = reindex(oz, allLabels);
+  const wbData = reindex(wb, allLabels);
+
+  const cfg = {
+    type: 'line',
+    data: {
+      labels: allLabels,
+      datasets: [
+        {
+          label: 'Ozon',
+          data: ozData,
+          borderColor: '#005BFF',
+          backgroundColor: 'rgba(0,91,255,.1)',
+          fill: true,
+          tension: .4,
+          pointRadius: 3,
+        },
+        {
+          label: 'WB',
+          data: wbData,
+          borderColor: '#CB11AB',
+          backgroundColor: 'rgba(203,17,171,.08)',
+          fill: true,
+          tension: .4,
+          pointRadius: 3,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { labels: { color: '#e2e8f0', font: { size: 12 } } },
+        tooltip: { backgroundColor: '#14141f', borderColor: '#1e1e2e', borderWidth: 1 },
+      },
+      scales: {
+        x: { ticks: { color: '#64748b', font: { size: 11 } }, grid: { color: '#1e1e2e' } },
+        y: { ticks: { color: '#64748b', font: { size: 11 } }, grid: { color: '#1e1e2e' }, beginAtZero: true },
+      },
+    },
+  };
+
+  if (CHART) { CHART.destroy(); }
+  CHART = new Chart(document.getElementById('salesChart').getContext('2d'), cfg);
+}
+
+// ─── Color block ──────────────────────────────────────────────────────────────
+function renderColors(elId, byColor, total) {
+  const el = document.getElementById(elId);
+  const colors = ['graphite', 'grey', 'brown'];
+  el.innerHTML = colors.map(c => {
+    const cnt = byColor[c] || 0;
+    const pct = total > 0 ? Math.round(cnt / total * 100) : 0;
+    return `
+      <div class="color-row">
+        <div class="color-dot" style="background:${COLOR_DOT[c]}"></div>
+        <div class="color-label">${COLOR_LABEL[c]}</div>
+        <div class="color-bar-wrap">
+          <div class="color-bar" style="width:${pct}%;background:${COLOR_BAR[c]}"></div>
+        </div>
+        <div class="color-val">${cnt}</div>
+      </div>`;
+  }).join('');
+}
+
+// ─── Stocks table ─────────────────────────────────────────────────────────────
+function renderStocks(elId, stocks) {
+  const el = document.getElementById(elId);
+  const colors = ['graphite', 'grey', 'brown'];
+  el.innerHTML = `<tr>
+    <th>Цвет</th><th>Остаток</th>
+  </tr>` + colors.map(c => {
+    const qty = stocks[c] || 0;
+    const cls = qtyColor(qty);
+    return `<tr>
+      <td style="display:flex;align-items:center;gap:8px;">
+        <div class="color-dot" style="background:${COLOR_DOT[c]}"></div>${COLOR_LABEL[c]}
+      </td>
+      <td><span class="stock-qty ${cls}">${qty}</span> шт</td>
+    </tr>`;
+  }).join('') + `<tr>
+    <td style="font-weight:600;">Итого</td>
+    <td><span class="stock-qty">${stocks.total || 0}</span> шт</td>
+  </tr>`;
+}
+
+// ─── Campaign list ────────────────────────────────────────────────────────────
+function renderCamps(elId, camps, spendKey) {
+  const el = document.getElementById(elId);
+  if (!camps || !camps.length) {
+    el.innerHTML = '<li style="color:var(--muted);font-size:12px;">Кампаний нет</li>';
+    return;
+  }
+  const sorted = [...camps].sort((a, b) => (b.spend || 0) - (a.spend || 0)).slice(0, 5);
+  el.innerHTML = sorted.map(c =>
+    `<li>
+      <span style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.name}</span>
+      <span>${fmtR(c.spend)}</span>
+    </li>`
+  ).join('');
+}
+
+// ─── Init & auto-refresh ──────────────────────────────────────────────────────
+loadData();
+setInterval(loadData, 30 * 60 * 1000); // refresh every 30 min
+</script>
+</body>
+</html>
