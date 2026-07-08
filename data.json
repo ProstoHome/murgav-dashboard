@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-07-09T02:42:05",
+  "updated_at": "2026-07-09T04:59:21",
   "ozon": {
     "7d": {
-      "orders": 55,
-      "revenue": 349635.0,
+      "orders": 56,
+      "revenue": 355992.0,
       "returns": 0,
       "by_color": {
         "graphite": 105,
         "grey": 74,
-        "brown": 95
+        "brown": 96
       },
       "daily": {
         "2026-07-02": {
@@ -40,19 +40,19 @@
           "revenue": 57213.0
         },
         "2026-07-09": {
-          "orders": 0,
-          "revenue": 0.0
+          "orders": 1,
+          "revenue": 6357.0
         }
       }
     },
     "30d": {
-      "orders": 274,
-      "revenue": 1698518.0,
+      "orders": 275,
+      "revenue": 1704875.0,
       "returns": 0,
       "by_color": {
         "graphite": 105,
         "grey": 74,
-        "brown": 95
+        "brown": 96
       },
       "daily": {
         "2026-06-09": {
@@ -176,16 +176,16 @@
           "revenue": 57213.0
         },
         "2026-07-09": {
-          "orders": 0,
-          "revenue": 0.0
+          "orders": 1,
+          "revenue": 6357.0
         }
       }
     },
     "stocks": {
       "graphite": 166,
       "grey": 151,
-      "brown": 136,
-      "total": 453
+      "brown": 135,
+      "total": 452
     },
     "ads": {
       "7d": {
