@@ -1,13 +1,13 @@
 {
-  "updated_at": "2026-07-08T18:33:21",
+  "updated_at": "2026-07-08T20:05:27",
   "ozon": {
     "7d": {
-      "orders": 59,
-      "revenue": 374747.0,
+      "orders": 60,
+      "revenue": 381104.0,
       "returns": 0,
       "by_color": {
         "graphite": 103,
-        "grey": 72,
+        "grey": 73,
         "brown": 95
       },
       "daily": {
@@ -40,18 +40,18 @@
           "revenue": 44499.0
         },
         "2026-07-08": {
-          "orders": 5,
-          "revenue": 31785.0
+          "orders": 6,
+          "revenue": 38142.0
         }
       }
     },
     "30d": {
-      "orders": 270,
-      "revenue": 1673090.0,
+      "orders": 271,
+      "revenue": 1679447.0,
       "returns": 0,
       "by_color": {
         "graphite": 103,
-        "grey": 72,
+        "grey": 73,
         "brown": 95
       },
       "daily": {
@@ -176,16 +176,16 @@
           "revenue": 44499.0
         },
         "2026-07-08": {
-          "orders": 5,
-          "revenue": 31785.0
+          "orders": 6,
+          "revenue": 38142.0
         }
       }
     },
     "stocks": {
       "graphite": 168,
-      "grey": 152,
+      "grey": 151,
       "brown": 137,
-      "total": 457
+      "total": 456
     },
     "ads": {
       "7d": {
@@ -386,114 +386,24 @@
   },
   "wb": {
     "7d": {
-      "orders": 11,
-      "revenue": 37127.0,
+      "orders": 0,
+      "revenue": 0,
       "by_color": {
-        "graphite": 13,
-        "grey": 11,
-        "brown": 18
+        "graphite": 0,
+        "grey": 0,
+        "brown": 0
       },
-      "daily": {
-        "2026-07-01": {
-          "orders": 2,
-          "revenue": 6526.0
-        },
-        "2026-07-02": {
-          "orders": 2,
-          "revenue": 6865.0
-        },
-        "2026-07-03": {
-          "orders": 2,
-          "revenue": 6885.0
-        },
-        "2026-07-04": {
-          "orders": 4,
-          "revenue": 13472.0
-        },
-        "2026-07-05": {
-          "orders": 1,
-          "revenue": 3379.0
-        }
-      }
+      "daily": {}
     },
     "30d": {
-      "orders": 42,
-      "revenue": 143112.62,
+      "orders": 0,
+      "revenue": 0.0,
       "by_color": {
-        "graphite": 13,
-        "grey": 11,
-        "brown": 18
+        "graphite": 0,
+        "grey": 0,
+        "brown": 0
       },
-      "daily": {
-        "2026-06-17": {
-          "orders": 2,
-          "revenue": 7028.0
-        },
-        "2026-06-18": {
-          "orders": 1,
-          "revenue": 3514.0
-        },
-        "2026-06-19": {
-          "orders": 1,
-          "revenue": 3507.0
-        },
-        "2026-06-20": {
-          "orders": 3,
-          "revenue": 10404.0
-        },
-        "2026-06-21": {
-          "orders": 1,
-          "revenue": 3425.0
-        },
-        "2026-06-24": {
-          "orders": 3,
-          "revenue": 10452.0
-        },
-        "2026-06-25": {
-          "orders": 4,
-          "revenue": 13140.0
-        },
-        "2026-06-26": {
-          "orders": 3,
-          "revenue": 10833.619999999999
-        },
-        "2026-06-27": {
-          "orders": 2,
-          "revenue": 6564.0
-        },
-        "2026-06-28": {
-          "orders": 3,
-          "revenue": 9807.0
-        },
-        "2026-06-29": {
-          "orders": 6,
-          "revenue": 20508.0
-        },
-        "2026-06-30": {
-          "orders": 2,
-          "revenue": 6803.0
-        },
-        "2026-07-01": {
-          "orders": 2,
-          "revenue": 6526.0
-        },
-        "2026-07-02": {
-          "orders": 2,
-          "revenue": 6865.0
-        },
-        "2026-07-03": {
-          "orders": 2,
-          "revenue": 6885.0
-        },
-        "2026-07-04": {
-          "orders": 4,
-          "revenue": 13472.0
-        },
-        "2026-07-05": {
-          "orders": 1,
-          "revenue": 3379.0
-        }
-      }
+      "daily": {}
     },
     "stocks": {
       "graphite": 0,
@@ -504,13 +414,13 @@
     "ads": {
       "7d": {
         "spend": 0,
-        "drr_pct": 0.0,
+        "drr_pct": null,
         "daily": {},
         "campaigns": []
       },
       "30d": {
         "spend": 0.0,
-        "drr_pct": 0.0,
+        "drr_pct": null,
         "daily": {},
         "campaigns": []
       }
