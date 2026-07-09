@@ -376,9 +376,9 @@ function renderAll() {
   renderColors('ozon-colors', oz.by_color, oz.orders);
   renderColors('wb-colors',   wb.by_color, wb.orders);
 
-  // Block 4 — stocks + оборачиваемость (объединено)
-  renderStocks('ozon-stocks', d.ozon.stocks, d.ozon['7d'].by_color, d.ozon['7d'].orders);
-  renderStocks('wb-stocks',   d.wb.stocks,   d.wb['7d'].by_color,   d.wb['7d'].orders);
+  // Block 4 — stocks + оборачиваемость (объединено, период из переключателя)
+  renderStocks('ozon-stocks', d.ozon.stocks, d.ozon[p].by_color, d.ozon[p].orders, p);
+  renderStocks('wb-stocks',   d.wb.stocks,   d.wb[p].by_color,   d.wb[p].orders,   p);
 
   // Block 1.5 — purchases / buyout rate
   renderPurchases(oz, wb);
@@ -498,16 +498,19 @@ function normalizeColors(byColor, totalOrders) {
 }
 
 // ─── Stocks table + оборачиваемость ──────────────────────────────────────────
-function renderStocks(elId, stocks, byColor7d, totalOrders7d) {
+// period: '7d' | '30d' — используется для расчёта прод/день и делителя
+function renderStocks(elId, stocks, byColorP, totalOrdersP, period) {
   const el  = document.getElementById(elId);
-  const ord = totalOrders7d || 0;
+  const ord = totalOrdersP || 0;
+  const dip = period === '30d' ? 30 : 7;  // days in period (делитель)
+  const pLabel = period === '30d' ? '30д' : '7д';
 
-  // Нормализуем by_color → реальные 7д заказы по цвету
-  const norm = normalizeColors(byColor7d || {}, ord);
+  // Нормализуем by_color → реальные orders по цвету за выбранный период
+  const norm = normalizeColors(byColorP || {}, ord);
 
-  function daysCover(stock, norm7d) {
-    if (!norm7d || norm7d <= 0 || !stock || stock <= 0) return null;
-    return Math.round(stock / (norm7d / 7));  // norm7d — заказов за 7д по цвету
+  function daysCover(stock, normP) {
+    if (!normP || normP <= 0 || !stock || stock <= 0) return null;
+    return Math.round(stock / (normP / dip));  // normP — заказов за период по цвету
   }
 
   function daysCell(days) {
@@ -519,10 +522,10 @@ function renderStocks(elId, stocks, byColor7d, totalOrders7d) {
   const rows = COLORS_LIST.map(c => {
     const qty  = stocks[c] || 0;
     const cls  = qtyColor(qty);
-    const n7   = norm[c] || 0;
-    const avgD = n7 > 0 ? (n7 / 7).toFixed(1) : null;
-    const days = daysCover(qty, n7);
-    const dx2  = daysCover(qty, n7 * 2);
+    const nP   = norm[c] || 0;
+    const avgD = nP > 0 ? (nP / dip).toFixed(1) : null;
+    const days = daysCover(qty, nP);
+    const dx2  = daysCover(qty, nP * 2);
     return `<tr>
       <td style="display:flex;align-items:center;gap:8px;">
         <div class="color-dot" style="background:${COLOR_DOT[c]}"></div>${COLOR_LABEL[c]}
@@ -536,14 +539,16 @@ function renderStocks(elId, stocks, byColor7d, totalOrders7d) {
 
   // Итоговая строка
   const totalStock = stocks.total || 0;
-  const totalN7    = COLORS_LIST.reduce((s, c) => s + (norm[c] || 0), 0);
-  const totalAvgD  = totalN7 > 0 ? (totalN7 / 7).toFixed(1) : null;
-  const totalDays  = daysCover(totalStock, totalN7);
-  const totalDx2   = daysCover(totalStock, totalN7 * 2);
+  const totalNP    = COLORS_LIST.reduce((s, c) => s + (norm[c] || 0), 0);
+  const totalAvgD  = totalNP > 0 ? (totalNP / dip).toFixed(1) : null;
+  const totalDays  = daysCover(totalStock, totalNP);
+  const totalDx2   = daysCover(totalStock, totalNP * 2);
 
   el.innerHTML = `
     <tr>
-      <th>Цвет</th><th>Остаток</th><th>Прод/день</th><th>Хватит</th><th>При ×2</th>
+      <th>Цвет</th><th>Остаток</th>
+      <th>Прод/день <span style="font-weight:400;color:var(--muted)">(${pLabel})</span></th>
+      <th>Хватит</th><th>При ×2</th>
     </tr>
     ${rows}
     <tr style="font-weight:600;">
