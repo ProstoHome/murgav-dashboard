@@ -88,8 +88,10 @@
 
   /* Stocks table */
   .stocks-table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  .stocks-table th { text-align: left; color: var(--muted); font-weight: 500; padding: 6px 10px; font-size: 11px; text-transform: uppercase; }
-  .stocks-table td { padding: 10px 10px; border-top: 1px solid var(--border); }
+  .stocks-table th { text-align: left; color: var(--muted); font-weight: 500; padding: 6px 6px; font-size: 11px; text-transform: uppercase; }
+  .stocks-table th:not(:first-child) { text-align: right; }
+  .stocks-table td { padding: 9px 6px; border-top: 1px solid var(--border); }
+  .stocks-table td:not(:first-child) { text-align: right; }
   .stock-qty { font-weight: 700; font-size: 16px; }
   .qty-green  { color: var(--green); }
   .qty-yellow { color: var(--yellow); }
@@ -263,13 +265,6 @@
   <div class="section-title">📦 Рекомендации по отгрузкам</div>
   <div class="card" id="shipment-block" style="margin-bottom:20px;"></div>
 
-  <!-- Block 4.6: Оборачиваемость по маркетплейсам -->
-  <div class="section-title">🔄 Оборачиваемость по маркетплейсам</div>
-  <div class="grid-2" style="margin-bottom:20px;">
-    <div class="card" id="turnover-ozon"></div>
-    <div class="card" id="turnover-wb"></div>
-  </div>
-
   <!-- Block 5: Advertising -->
   <div class="section-title">Реклама и ДРР</div>
   <div class="grid-2">
@@ -381,18 +376,15 @@ function renderAll() {
   renderColors('ozon-colors', oz.by_color, oz.orders);
   renderColors('wb-colors',   wb.by_color, wb.orders);
 
-  // Block 4 — stocks
-  renderStocks('ozon-stocks', d.ozon.stocks);
-  renderStocks('wb-stocks',   d.wb.stocks);
+  // Block 4 — stocks + оборачиваемость (объединено)
+  renderStocks('ozon-stocks', d.ozon.stocks, d.ozon['7d'].by_color, d.ozon['7d'].orders);
+  renderStocks('wb-stocks',   d.wb.stocks,   d.wb['7d'].by_color,   d.wb['7d'].orders);
 
   // Block 1.5 — purchases / buyout rate
   renderPurchases(oz, wb);
 
   // Block 4.5 — shipment
   renderShipment();
-
-  // Block 4.6 — turnover per marketplace
-  renderTurnover();
 
   // Block 5 — ads
   const ozAds = d.ozon.ads[p];
@@ -496,25 +488,71 @@ function renderColors(elId, byColor, total) {
   }).join('');
 }
 
-// ─── Stocks table ─────────────────────────────────────────────────────────────
-function renderStocks(elId, stocks) {
-  const el = document.getElementById(elId);
-  const colors = ['graphite', 'grey', 'brown'];
-  el.innerHTML = `<tr>
-    <th>Цвет</th><th>Остаток</th>
-  </tr>` + colors.map(c => {
-    const qty = stocks[c] || 0;
-    const cls = qtyColor(qty);
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+// Нормализует by_color к реальным orders (защита от бага: 30д в 7д-поле)
+const COLORS_LIST = ['graphite', 'grey', 'brown'];
+function normalizeColors(byColor, totalOrders) {
+  const sum = COLORS_LIST.reduce((s, c) => s + (byColor[c] || 0), 0);
+  if (sum === 0 || totalOrders === 0) return Object.fromEntries(COLORS_LIST.map(c => [c, 0]));
+  return Object.fromEntries(COLORS_LIST.map(c => [c, (byColor[c] || 0) / sum * totalOrders]));
+}
+
+// ─── Stocks table + оборачиваемость ──────────────────────────────────────────
+function renderStocks(elId, stocks, byColor7d, totalOrders7d) {
+  const el  = document.getElementById(elId);
+  const ord = totalOrders7d || 0;
+
+  // Нормализуем by_color → реальные 7д заказы по цвету
+  const norm = normalizeColors(byColor7d || {}, ord);
+
+  function daysCover(stock, norm7d) {
+    if (!norm7d || norm7d <= 0 || !stock || stock <= 0) return null;
+    return Math.round(stock / (norm7d / 7));  // norm7d — заказов за 7д по цвету
+  }
+
+  function daysCell(days) {
+    if (days == null) return '<td style="color:var(--muted)">—</td>';
+    const color = days > 30 ? 'var(--green)' : days > 14 ? 'var(--yellow)' : 'var(--red)';
+    return `<td style="color:${color};font-weight:600;">${days} дн</td>`;
+  }
+
+  const rows = COLORS_LIST.map(c => {
+    const qty  = stocks[c] || 0;
+    const cls  = qtyColor(qty);
+    const n7   = norm[c] || 0;
+    const avgD = n7 > 0 ? (n7 / 7).toFixed(1) : null;
+    const days = daysCover(qty, n7);
+    const dx2  = daysCover(qty, n7 * 2);
     return `<tr>
       <td style="display:flex;align-items:center;gap:8px;">
         <div class="color-dot" style="background:${COLOR_DOT[c]}"></div>${COLOR_LABEL[c]}
       </td>
       <td><span class="stock-qty ${cls}">${qty}</span> шт</td>
+      <td style="color:var(--muted);font-size:12px;">${avgD != null ? avgD + ' шт' : '—'}</td>
+      ${daysCell(days)}
+      ${daysCell(dx2)}
     </tr>`;
-  }).join('') + `<tr>
-    <td style="font-weight:600;">Итого</td>
-    <td><span class="stock-qty">${stocks.total || 0}</span> шт</td>
-  </tr>`;
+  }).join('');
+
+  // Итоговая строка
+  const totalStock = stocks.total || 0;
+  const totalN7    = COLORS_LIST.reduce((s, c) => s + (norm[c] || 0), 0);
+  const totalAvgD  = totalN7 > 0 ? (totalN7 / 7).toFixed(1) : null;
+  const totalDays  = daysCover(totalStock, totalN7);
+  const totalDx2   = daysCover(totalStock, totalN7 * 2);
+
+  el.innerHTML = `
+    <tr>
+      <th>Цвет</th><th>Остаток</th><th>Прод/день</th><th>Хватит</th><th>При ×2</th>
+    </tr>
+    ${rows}
+    <tr style="font-weight:600;">
+      <td>Итого</td>
+      <td><span class="stock-qty">${totalStock}</span> шт</td>
+      <td style="color:var(--muted);font-size:12px;">${totalAvgD != null ? totalAvgD + ' шт' : '—'}</td>
+      ${daysCell(totalDays)}
+      ${daysCell(totalDx2)}
+    </tr>`;
 }
 
 // ─── Shipment recommendations ────────────────────────────────────────────────
@@ -523,13 +561,6 @@ function renderShipment() {
   const colors = ['graphite', 'grey', 'brown'];
   const period7d = d.ozon['7d'];
   const wb7d    = d.wb['7d'];
-
-  // Нормализуем by_color к реальным orders (защита от бага: by_color может быть из другого периода)
-  function normalizeColors(byColor, totalOrders) {
-    const sum = colors.reduce((s, c) => s + (byColor[c] || 0), 0);
-    if (sum === 0 || totalOrders === 0) return Object.fromEntries(colors.map(c => [c, 0]));
-    return Object.fromEntries(colors.map(c => [c, (byColor[c] || 0) / sum * totalOrders]));
-  }
 
   const ozNorm = normalizeColors(period7d.by_color, period7d.orders);
   const wbNorm = normalizeColors(wb7d.by_color, wb7d.orders);
@@ -671,59 +702,6 @@ function renderPurchases(oz, wb) {
   const wbBuyEl = document.getElementById('c-wb-buyout');
   wbBuyEl.textContent = wbBuyPct != null ? wbBuyPct + '%' : '—';
   wbBuyEl.style.color = buyColor(wbBuyPct);
-}
-
-// ─── Оборачиваемость по маркетплейсам ────────────────────────────────────────
-function renderTurnover() {
-  const d   = DATA;
-  const oz7 = d.ozon['7d'];   // всегда берём 7д для оборачиваемости
-  const wb7 = d.wb['7d'];
-
-  function turnDays(stock, orders7d) {
-    if (!orders7d || orders7d <= 0 || !stock || stock <= 0) return null;
-    return Math.round(stock / (orders7d / 7));
-  }
-  function turnColor(days) {
-    if (days == null) return 'var(--muted)';
-    if (days > 30)   return 'var(--green)';
-    if (days > 14)   return 'var(--yellow)';
-    return 'var(--red)';
-  }
-
-  function buildCard(el, mpDotColor, mpName, stock, orders7d) {
-    const avgDay = orders7d > 0 ? (orders7d / 7).toFixed(1) : null;
-    const days   = turnDays(stock, orders7d);
-    const noData = orders7d === 0 && stock === 0;
-
-    el.innerHTML = `
-      <div class="turn-mp-header">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="${mpDotColor}">
-          <circle cx="6" cy="6" r="6"/>
-        </svg>
-        ${mpName}
-      </div>
-      ${noData
-        ? '<div class="turn-no-data">⚠️ Нет данных от маркетплейса</div>'
-        : `<div class="turn-big-val" style="color:${turnColor(days)}">
-             ${days != null ? days + ' дн' : '—'}
-           </div>
-           <div class="turn-big-label">оборачиваемость (при текущем темпе, 7д)</div>
-           <div class="turn-stats-row">
-             <div class="turn-stat-box">
-               <div class="turn-stat-label">Остаток на МП</div>
-               <div class="turn-stat-val">${stock} шт</div>
-             </div>
-             <div class="turn-stat-box">
-               <div class="turn-stat-label">Ср/день (7д)</div>
-               <div class="turn-stat-val">${avgDay != null ? avgDay + ' шт' : '—'}</div>
-             </div>
-           </div>`
-      }
-    `;
-  }
-
-  buildCard(document.getElementById('turnover-ozon'), '#005BFF', 'Ozon', d.ozon.stocks.total, oz7.orders);
-  buildCard(document.getElementById('turnover-wb'),   '#CB11AB', 'WB',   d.wb.stocks.total,   wb7.orders);
 }
 
 // ─── Campaign list ────────────────────────────────────────────────────────────
