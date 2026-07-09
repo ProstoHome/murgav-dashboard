@@ -121,6 +121,33 @@
 
   /* Divider in ads */
   .ads-divider { width: 1px; background: var(--border); margin: 0 10px; }
+
+  /* Shipment block */
+  .ship-avg { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 14px; }
+  .ship-avg-item { display: flex; flex-direction: column; }
+  .ship-avg-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; }
+  .ship-avg-val { font-size: 22px; font-weight: 700; color: var(--accent); margin-top: 2px; }
+  .ship-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+  .ship-table th { text-align: left; color: var(--muted); font-size: 11px; text-transform: uppercase; padding: 4px 8px; }
+  .ship-table td { padding: 9px 8px; border-top: 1px solid var(--border); vertical-align: middle; }
+  .days-pill { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 13px; font-weight: 700; }
+  .days-green  { background: rgba(34,197,94,.15);  color: var(--green); }
+  .days-yellow { background: rgba(234,179,8,.15);   color: var(--yellow); }
+  .days-red    { background: rgba(239,68,68,.15);   color: var(--red); }
+  .days-none   { background: var(--border); color: var(--muted); }
+  .ship-alert  { background: rgba(239,68,68,.1);  border: 1px solid rgba(239,68,68,.3);  border-radius: 8px; padding: 10px 14px; margin-top: 8px; font-size: 13px; color: var(--red); }
+  .ship-warn   { background: rgba(234,179,8,.1);  border: 1px solid rgba(234,179,8,.3);  border-radius: 8px; padding: 10px 14px; margin-top: 8px; font-size: 13px; color: var(--yellow); }
+  .ship-note   { font-size: 11px; color: var(--muted); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); line-height: 1.6; }
+
+  /* Turnover block */
+  .turn-mp-header { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+  .turn-big-val   { font-size: 36px; font-weight: 700; margin: 4px 0 2px; }
+  .turn-big-label { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+  .turn-stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .turn-stat-box  { background: var(--bg); border-radius: 8px; padding: 10px 12px; }
+  .turn-stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+  .turn-stat-val  { font-size: 18px; font-weight: 700; }
+  .turn-no-data   { color: var(--muted); font-size: 14px; text-align: center; padding: 24px 0; }
 </style>
 </head>
 <body>
@@ -173,6 +200,30 @@
     </div>
   </div>
 
+  <!-- Block 1.5: Выкупы и % выкупа -->
+  <div class="grid-4">
+    <div class="card accent-green">
+      <div class="card-title">Выкупы — Ozon</div>
+      <div class="card-value" id="c-ozon-purchases">—</div>
+      <div class="card-sub">шт выкуплено</div>
+    </div>
+    <div class="card accent-green">
+      <div class="card-title">% выкупа — Ozon</div>
+      <div class="card-value" id="c-ozon-buyout">—</div>
+      <div class="card-sub">от заказов</div>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-title">Выкупы — WB</div>
+      <div class="card-value" id="c-wb-purchases">—</div>
+      <div class="card-sub">шт выкуплено</div>
+    </div>
+    <div class="card accent-blue">
+      <div class="card-title">% выкупа — WB</div>
+      <div class="card-value" id="c-wb-buyout">—</div>
+      <div class="card-sub">от заказов</div>
+    </div>
+  </div>
+
   <!-- Block 2: Chart -->
   <div class="section-title">Динамика продаж</div>
   <div class="chart-card">
@@ -206,6 +257,17 @@
       <div class="card-title">WB FBO · 80×60</div>
       <table class="stocks-table" id="wb-stocks"></table>
     </div>
+  </div>
+
+  <!-- Block 4.5: Shipment recommendations -->
+  <div class="section-title">📦 Рекомендации по отгрузкам</div>
+  <div class="card" id="shipment-block" style="margin-bottom:20px;"></div>
+
+  <!-- Block 4.6: Оборачиваемость по маркетплейсам -->
+  <div class="section-title">🔄 Оборачиваемость по маркетплейсам</div>
+  <div class="grid-2" style="margin-bottom:20px;">
+    <div class="card" id="turnover-ozon"></div>
+    <div class="card" id="turnover-wb"></div>
   </div>
 
   <!-- Block 5: Advertising -->
@@ -322,6 +384,15 @@ function renderAll() {
   // Block 4 — stocks
   renderStocks('ozon-stocks', d.ozon.stocks);
   renderStocks('wb-stocks',   d.wb.stocks);
+
+  // Block 1.5 — purchases / buyout rate
+  renderPurchases(oz, wb);
+
+  // Block 4.5 — shipment
+  renderShipment();
+
+  // Block 4.6 — turnover per marketplace
+  renderTurnover();
 
   // Block 5 — ads
   const ozAds = d.ozon.ads[p];
@@ -444,6 +515,215 @@ function renderStocks(elId, stocks) {
     <td style="font-weight:600;">Итого</td>
     <td><span class="stock-qty">${stocks.total || 0}</span> шт</td>
   </tr>`;
+}
+
+// ─── Shipment recommendations ────────────────────────────────────────────────
+function renderShipment() {
+  const d = DATA;
+  const colors = ['graphite', 'grey', 'brown'];
+  const period7d = d.ozon['7d'];
+  const wb7d    = d.wb['7d'];
+
+  // Нормализуем by_color к реальным orders (защита от бага: by_color может быть из другого периода)
+  function normalizeColors(byColor, totalOrders) {
+    const sum = colors.reduce((s, c) => s + (byColor[c] || 0), 0);
+    if (sum === 0 || totalOrders === 0) return Object.fromEntries(colors.map(c => [c, 0]));
+    return Object.fromEntries(colors.map(c => [c, (byColor[c] || 0) / sum * totalOrders]));
+  }
+
+  const ozNorm = normalizeColors(period7d.by_color, period7d.orders);
+  const wbNorm = normalizeColors(wb7d.by_color, wb7d.orders);
+
+  // Среднесуточные за 7 дней (Ozon + WB)
+  const avgByColor = Object.fromEntries(colors.map(c => [
+    c, ((ozNorm[c] || 0) + (wbNorm[c] || 0)) / 7
+  ]));
+  const avgTotal = colors.reduce((s, c) => s + avgByColor[c], 0);
+
+  // Суммарные остатки
+  const stockByColor = Object.fromEntries(colors.map(c => [
+    c, (d.ozon.stocks[c] || 0) + (d.wb.stocks[c] || 0)
+  ]));
+  const stockTotal = colors.reduce((s, c) => s + stockByColor[c], 0);
+
+  function daysCover(stock, avg) {
+    if (avg <= 0) return null;
+    return Math.round(stock / avg);
+  }
+
+  function daysPill(n) {
+    if (n === null) return '<span class="days-pill days-none">нет данных</span>';
+    const cls = n > 30 ? 'days-green' : n > 14 ? 'days-yellow' : 'days-red';
+    return `<span class="days-pill ${cls}">${n} дн</span>`;
+  }
+
+  const totalCover   = daysCover(stockTotal, avgTotal);
+  const totalCoverX2 = daysCover(stockTotal, avgTotal * 2);
+
+  // Строки таблицы
+  const rows = colors.map(c => {
+    const avg   = avgByColor[c];
+    const stock = stockByColor[c];
+    const cover   = daysCover(stock, avg);
+    const coverX2 = daysCover(stock, avg * 2);
+    return `<tr>
+      <td style="display:flex;align-items:center;gap:8px;">
+        <div class="color-dot" style="background:${COLOR_DOT[c]}"></div>${COLOR_LABEL[c]}
+      </td>
+      <td style="font-weight:600;">${stock} шт</td>
+      <td style="color:var(--muted);">${avg > 0 ? avg.toFixed(1) : '—'} шт/д</td>
+      <td>${daysPill(cover)}</td>
+      <td>${daysPill(coverX2)}</td>
+    </tr>`;
+  }).join('');
+
+  // Алерты по цветам
+  const alerts = colors.map(c => {
+    const avg   = avgByColor[c];
+    const stock = stockByColor[c];
+    const cover = daysCover(stock, avg);
+    if (cover === null) return '';
+    if (cover < 14) {
+      const need = Math.max(0, Math.round(avg * 21 - stock));
+      return `<div class="ship-alert">🔴 <b>${COLOR_LABEL[c]}</b>: запас на ${cover} дн — срочно отгрузить ≥ <b>${need} шт</b></div>`;
+    }
+    if (cover < 21) {
+      const need = Math.max(0, Math.round(avg * 21 - stock));
+      return `<div class="ship-warn">🟡 <b>${COLOR_LABEL[c]}</b>: запас на ${cover} дн — запланируй отгрузку ≥ <b>${need} шт</b></div>`;
+    }
+    return '';
+  }).join('');
+
+  const wbNote = (wb7d.orders === 0 && d.wb.stocks.total === 0)
+    ? '<div style="font-size:12px;color:var(--muted);margin-top:6px;">⚠️ WB данные не загружены — расчёт только по Ozon</div>'
+    : '';
+
+  document.getElementById('shipment-block').innerHTML = `
+    <div class="ship-avg">
+      <div class="ship-avg-item">
+        <span class="ship-avg-label">Продажи сред/сут</span>
+        <span class="ship-avg-val">${avgTotal > 0 ? avgTotal.toFixed(1) : '—'} шт</span>
+      </div>
+      <div class="ship-avg-item">
+        <span class="ship-avg-label">Общий остаток</span>
+        <span class="ship-avg-val">${stockTotal} шт</span>
+      </div>
+      <div class="ship-avg-item">
+        <span class="ship-avg-label">Хватит на (текущий темп)</span>
+        <span class="ship-avg-val" style="color:${totalCover !== null && totalCover <= 14 ? 'var(--red)' : totalCover !== null && totalCover <= 30 ? 'var(--yellow)' : 'var(--green)'}">
+          ${totalCover !== null ? totalCover + ' дн' : '—'}
+        </span>
+      </div>
+      <div class="ship-avg-item">
+        <span class="ship-avg-label">При росте ×2</span>
+        <span class="ship-avg-val" style="color:${totalCoverX2 !== null && totalCoverX2 <= 14 ? 'var(--red)' : totalCoverX2 !== null && totalCoverX2 <= 30 ? 'var(--yellow)' : 'var(--green)'}">
+          ${totalCoverX2 !== null ? totalCoverX2 + ' дн' : '—'}
+        </span>
+      </div>
+    </div>
+    <table class="ship-table">
+      <tr>
+        <th>Цвет</th><th>Остаток</th><th>Ср/сут</th><th>Хватит</th><th>При ×2</th>
+      </tr>
+      ${rows}
+      <tr style="font-weight:600;">
+        <td>Итого</td>
+        <td>${stockTotal} шт</td>
+        <td style="color:var(--muted);">${avgTotal > 0 ? avgTotal.toFixed(1) : '—'} шт/д</td>
+        <td>${daysPill(totalCover)}</td>
+        <td>${daysPill(totalCoverX2)}</td>
+      </tr>
+    </table>
+    ${alerts}
+    ${wbNote}
+    <div class="ship-note">
+      🟢 &gt; 30 дней &nbsp;·&nbsp; 🟡 14–30 дней &nbsp;·&nbsp; 🔴 &lt; 14 дней &nbsp;·&nbsp;
+      Алерт = рекомендуемый запас 21 день &nbsp;·&nbsp; Рассчитано по последним 7 дням продаж
+    </div>
+  `;
+}
+
+// ─── Выкупы и % выкупа ───────────────────────────────────────────────────────
+function renderPurchases(oz, wb) {
+  // Выкупы = заказы − возвраты (отмены пока не выделяются отдельно API)
+  const ozOrders  = oz.orders  || 0;
+  const ozReturns = oz.returns || 0;
+  const ozPurch   = Math.max(0, ozOrders - ozReturns);
+  const ozBuyPct  = ozOrders > 0 ? Math.round(ozPurch / ozOrders * 100) : null;
+
+  const wbOrders  = wb.orders  || 0;
+  const wbReturns = (wb.returns != null) ? wb.returns : 0;
+  const wbPurch   = wbOrders > 0 ? Math.max(0, wbOrders - wbReturns) : null;
+  const wbBuyPct  = wbOrders > 0 ? Math.round((wbPurch || 0) / wbOrders * 100) : null;
+
+  document.getElementById('c-ozon-purchases').textContent = fmt(ozPurch);
+  document.getElementById('c-wb-purchases').textContent   = wbPurch != null ? fmt(wbPurch) : '—';
+
+  function buyColor(pct) {
+    if (pct == null) return 'var(--muted)';
+    return pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)';
+  }
+
+  const ozBuyEl = document.getElementById('c-ozon-buyout');
+  ozBuyEl.textContent = ozBuyPct != null ? ozBuyPct + '%' : '—';
+  ozBuyEl.style.color = buyColor(ozBuyPct);
+
+  const wbBuyEl = document.getElementById('c-wb-buyout');
+  wbBuyEl.textContent = wbBuyPct != null ? wbBuyPct + '%' : '—';
+  wbBuyEl.style.color = buyColor(wbBuyPct);
+}
+
+// ─── Оборачиваемость по маркетплейсам ────────────────────────────────────────
+function renderTurnover() {
+  const d   = DATA;
+  const oz7 = d.ozon['7d'];   // всегда берём 7д для оборачиваемости
+  const wb7 = d.wb['7d'];
+
+  function turnDays(stock, orders7d) {
+    if (!orders7d || orders7d <= 0 || !stock || stock <= 0) return null;
+    return Math.round(stock / (orders7d / 7));
+  }
+  function turnColor(days) {
+    if (days == null) return 'var(--muted)';
+    if (days > 30)   return 'var(--green)';
+    if (days > 14)   return 'var(--yellow)';
+    return 'var(--red)';
+  }
+
+  function buildCard(el, mpDotColor, mpName, stock, orders7d) {
+    const avgDay = orders7d > 0 ? (orders7d / 7).toFixed(1) : null;
+    const days   = turnDays(stock, orders7d);
+    const noData = orders7d === 0 && stock === 0;
+
+    el.innerHTML = `
+      <div class="turn-mp-header">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="${mpDotColor}">
+          <circle cx="6" cy="6" r="6"/>
+        </svg>
+        ${mpName}
+      </div>
+      ${noData
+        ? '<div class="turn-no-data">⚠️ Нет данных от маркетплейса</div>'
+        : `<div class="turn-big-val" style="color:${turnColor(days)}">
+             ${days != null ? days + ' дн' : '—'}
+           </div>
+           <div class="turn-big-label">оборачиваемость (при текущем темпе, 7д)</div>
+           <div class="turn-stats-row">
+             <div class="turn-stat-box">
+               <div class="turn-stat-label">Остаток на МП</div>
+               <div class="turn-stat-val">${stock} шт</div>
+             </div>
+             <div class="turn-stat-box">
+               <div class="turn-stat-label">Ср/день (7д)</div>
+               <div class="turn-stat-val">${avgDay != null ? avgDay + ' шт' : '—'}</div>
+             </div>
+           </div>`
+      }
+    `;
+  }
+
+  buildCard(document.getElementById('turnover-ozon'), '#005BFF', 'Ozon', d.ozon.stocks.total, oz7.orders);
+  buildCard(document.getElementById('turnover-wb'),   '#CB11AB', 'WB',   d.wb.stocks.total,   wb7.orders);
 }
 
 // ─── Campaign list ────────────────────────────────────────────────────────────
