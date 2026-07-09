@@ -1,20 +1,16 @@
 {
-  "updated_at": "2026-07-09T23:45:35",
+  "updated_at": "2026-07-10T03:47:21",
   "ozon": {
     "7d": {
-      "orders": 59,
-      "revenue": 375063.0,
+      "orders": 55,
+      "revenue": 349635.0,
       "returns": 0,
       "by_color": {
         "graphite": 105,
-        "grey": 76,
+        "grey": 77,
         "brown": 97
       },
       "daily": {
-        "2026-07-02": {
-          "orders": 6,
-          "revenue": 38142.0
-        },
         "2026-07-03": {
           "orders": 8,
           "revenue": 50856.0
@@ -40,25 +36,25 @@
           "revenue": 57213.0
         },
         "2026-07-09": {
-          "orders": 4,
-          "revenue": 25428.0
+          "orders": 6,
+          "revenue": 38142.0
+        },
+        "2026-07-10": {
+          "orders": 0,
+          "revenue": 0.0
         }
       }
     },
     "30d": {
-      "orders": 278,
-      "revenue": 1723946.0,
+      "orders": 279,
+      "revenue": 1732100.0,
       "returns": 0,
       "by_color": {
         "graphite": 105,
-        "grey": 76,
+        "grey": 77,
         "brown": 97
       },
       "daily": {
-        "2026-06-09": {
-          "orders": 1,
-          "revenue": 4560.0
-        },
         "2026-06-10": {
           "orders": 5,
           "revenue": 26582.0
@@ -176,16 +172,20 @@
           "revenue": 57213.0
         },
         "2026-07-09": {
-          "orders": 4,
-          "revenue": 25428.0
+          "orders": 6,
+          "revenue": 38142.0
+        },
+        "2026-07-10": {
+          "orders": 0,
+          "revenue": 0.0
         }
       }
     },
     "stocks": {
       "graphite": 166,
-      "grey": 149,
+      "grey": 147,
       "brown": 135,
-      "total": 450
+      "total": 448
     },
     "ads": {
       "7d": {
@@ -386,18 +386,14 @@
   },
   "wb": {
     "7d": {
-      "orders": 26,
-      "revenue": 116011.5,
+      "orders": 22,
+      "revenue": 97939.58,
       "by_color": {
         "graphite": 16,
         "grey": 24,
         "brown": 27
       },
       "daily": {
-        "2026-07-02": {
-          "orders": 4,
-          "revenue": 18071.92
-        },
         "2026-07-03": {
           "orders": 4,
           "revenue": 17731.079999999998
