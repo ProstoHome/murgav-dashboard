@@ -1,20 +1,16 @@
 {
-  "updated_at": "2026-07-11T22:46:32",
+  "updated_at": "2026-07-12T02:49:20",
   "ozon": {
     "7d": {
-      "orders": 72,
-      "revenue": 457069.0,
+      "orders": 64,
+      "revenue": 406213.0,
       "returns": 0,
       "by_color": {
-        "graphite": 110,
-        "grey": 87,
-        "brown": 102
+        "graphite": 109,
+        "grey": 84,
+        "brown": 100
       },
       "daily": {
-        "2026-07-04": {
-          "orders": 9,
-          "revenue": 57213.0
-        },
         "2026-07-05": {
           "orders": 9,
           "revenue": 57213.0
@@ -42,23 +38,23 @@
         "2026-07-11": {
           "orders": 16,
           "revenue": 101077.0
+        },
+        "2026-07-12": {
+          "orders": 1,
+          "revenue": 6357.0
         }
       }
     },
     "30d": {
-      "orders": 299,
-      "revenue": 1863808.0,
+      "orders": 293,
+      "revenue": 1834355.0,
       "returns": 0,
       "by_color": {
-        "graphite": 110,
-        "grey": 87,
-        "brown": 102
+        "graphite": 109,
+        "grey": 84,
+        "brown": 100
       },
       "daily": {
-        "2026-06-11": {
-          "orders": 7,
-          "revenue": 35810.0
-        },
         "2026-06-12": {
           "orders": 7,
           "revenue": 37876.0
@@ -178,14 +174,18 @@
         "2026-07-11": {
           "orders": 16,
           "revenue": 101077.0
+        },
+        "2026-07-12": {
+          "orders": 1,
+          "revenue": 6357.0
         }
       }
     },
     "stocks": {
       "graphite": 161,
-      "grey": 135,
+      "grey": 134,
       "brown": 129,
-      "total": 425
+      "total": 424
     },
     "ads": {
       "7d": {
@@ -386,18 +386,14 @@
   },
   "wb": {
     "7d": {
-      "orders": 27,
-      "revenue": 120493.47,
+      "orders": 23,
+      "revenue": 102503.59,
       "by_color": {
         "graphite": 19,
         "grey": 26,
         "brown": 30
       },
       "daily": {
-        "2026-07-04": {
-          "orders": 4,
-          "revenue": 17989.88
-        },
         "2026-07-05": {
           "orders": 1,
           "revenue": 4497.47
