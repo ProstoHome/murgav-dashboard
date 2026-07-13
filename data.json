@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-07-13T15:54:18",
+  "updated_at": "2026-07-13T17:56:27",
   "ozon": {
     "7d": {
-      "orders": 69,
-      "revenue": 437998.0,
+      "orders": 72,
+      "revenue": 456769.0,
       "returns": 0,
       "by_color": {
         "graphite": 19,
-        "grey": 27,
-        "brown": 23
+        "grey": 29,
+        "brown": 24
       },
       "daily": {
         "2026-07-06": {
@@ -82,25 +82,25 @@
           }
         },
         "2026-07-13": {
-          "orders": 5,
-          "revenue": 31785.0,
+          "orders": 8,
+          "revenue": 50556.0,
           "returns": 0,
           "by_color": {
             "graphite": 1,
-            "grey": 3,
-            "brown": 1
+            "grey": 5,
+            "brown": 2
           }
         }
       }
     },
     "30d": {
-      "orders": 300,
-      "revenue": 1885477.0,
+      "orders": 303,
+      "revenue": 1904248.0,
       "returns": 0,
       "by_color": {
         "graphite": 112,
-        "grey": 87,
-        "brown": 101
+        "grey": 89,
+        "brown": 102
       },
       "daily": {
         "2026-06-13": {
@@ -404,27 +404,27 @@
           }
         },
         "2026-07-13": {
-          "orders": 5,
-          "revenue": 31785.0,
+          "orders": 8,
+          "revenue": 50556.0,
           "returns": 0,
           "by_color": {
             "graphite": 1,
-            "grey": 3,
-            "brown": 1
+            "grey": 5,
+            "brown": 2
           }
         }
       }
     },
     "stocks": {
       "graphite": 158,
-      "grey": 129,
-      "brown": 125,
-      "total": 412
+      "grey": 127,
+      "brown": 124,
+      "total": 409
     },
     "ads": {
       "7d": {
         "spend": 58033.64,
-        "drr_pct": 13.2,
+        "drr_pct": 12.7,
         "daily": {
           "2026-07-06": 4432.24,
           "2026-07-07": 5627.7,
@@ -530,7 +530,7 @@
       },
       "30d": {
         "spend": 103603.29,
-        "drr_pct": 5.5,
+        "drr_pct": 5.4,
         "daily": {
           "2026-06-26": 1910.07,
           "2026-06-27": 4169.47,
