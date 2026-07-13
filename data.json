@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-14T02:02:51",
+  "updated_at": "2026-07-14T04:05:02",
   "ozon": {
     "7d": {
       "orders": 70,
@@ -79,6 +79,16 @@
             "graphite": 2,
             "grey": 8,
             "brown": 3
+          }
+        },
+        "2026-07-14": {
+          "orders": 0,
+          "revenue": 0.0,
+          "returns": 0,
+          "by_color": {
+            "graphite": 0,
+            "grey": 0,
+            "brown": 0
           }
         }
       }
@@ -391,6 +401,16 @@
             "graphite": 2,
             "grey": 8,
             "brown": 3
+          }
+        },
+        "2026-07-14": {
+          "orders": 0,
+          "revenue": 0.0,
+          "returns": 0,
+          "by_color": {
+            "graphite": 0,
+            "grey": 0,
+            "brown": 0
           }
         }
       }
