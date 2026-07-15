@@ -316,12 +316,11 @@ def fetch_ozon_performance(date_from: str, date_to: str) -> dict:
 
     camp_meta  = {str(c.get("id", "")): c for c in campaigns_raw if c.get("id")}
 
-    # Only request stats for RUNNING campaigns — inactive ones cause 429 pileup with no useful data
-    RUNNING_STATES = {"CAMPAIGN_STATE_RUNNING", "RUNNING", "ACTIVE"}
-    running_ids = [cid for cid, meta in camp_meta.items()
-                   if meta.get("state", "") in RUNNING_STATES]
-    camp_ids = running_ids if running_ids else list(camp_meta.keys())  # fallback to all if none running
-    print(f"      ℹ️  Ozon Performance: {len(camp_ids)} RUNNING кампаний из {len(camp_meta)} всего")
+    # Запрашиваем ВСЕ кампании для полной истории за 30 дней.
+    # Фильтрация только RUNNING давала неполный период (19 вместо 30 дней),
+    # т.к. исторические данные inactive кампаний не попадали в выборку.
+    camp_ids = list(camp_meta.keys())
+    print(f"      ℹ️  Ozon Performance: {len(camp_ids)} кампаний всего (запрашиваем все для полной истории)")
 
     # ── Step 2: POST async stats requests — 1 campaign per batch for per-campaign spend tracking ──────
     BATCH_SIZE      = 1   # 1 campaign per request → each UUID maps to exactly 1 campaign
@@ -677,9 +676,11 @@ def fetch_wb_ads(date_from: str, date_to: str) -> dict:
         print(f"      ℹ️  WB ads: нет кампаний")
         return {"spend": 0.0, "campaigns": [], "daily": {}}
 
-    # Step 2: GET /adv/v3/fullstats?ids=ID1,ID2,...&from=YYYY-MM-DD&to=YYYY-MM-DD
-    # ВАЖНО: endpoint принимает GET (не POST — 405). Запятые в ids НЕ кодировать (%2C).
-    # Max 50 campaign IDs per request; rate-limit: 1 req/min global per seller
+    # Step 2: POST /adv/v3/fullstats?from=YYYY-MM-DD&to=YYYY-MM-DD
+    # ВАЖНО: endpoint ТОЛЬКО принимает POST (GET → 405 Method Not Allowed).
+    # IDs передаём в теле как JSON-массив целых чисел: [12345, 67890, ...]
+    # Даты — query params: ?from=...&to=...  Max range: 7 days. Max 50 IDs per batch.
+    # Rate-limit: 1 req/min global per seller.
     time.sleep(90)  # WB adv API global limiter — 90s гарантирует сброс rate-limit
 
     ADS_BATCH = 50
@@ -689,12 +690,12 @@ def fetch_wb_ads(date_from: str, date_to: str) -> dict:
         if b_num > 0:
             time.sleep(65)
         try:
-            ids_str  = ",".join(str(cid) for cid in batch)
-            # URL строим вручную — requests.params кодирует запятые как %2C, WB не принимает
-            full_url = f"{fullstats_base}?ids={ids_str}&from={date_from}&to={date_to}"
-            r2 = api_get_with_retry(
+            full_url = f"{fullstats_base}?from={date_from}&to={date_to}"
+            # Тело запроса — JSON-массив целых advertId
+            r2 = api_post_with_retry(
                 full_url,
                 headers=WB_ADS_HEADERS,
+                json=[int(cid) for cid in batch],
                 timeout=60,
                 max_retries=3, initial_delay=120
             )
