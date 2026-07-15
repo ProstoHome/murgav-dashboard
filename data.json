@@ -1,14 +1,14 @@
 {
-  "updated_at": "2026-07-15T15:05:07",
+  "updated_at": "2026-07-15T19:24:07",
   "ozon": {
     "7d": {
-      "orders": 74,
-      "revenue": 466355.0,
+      "orders": 75,
+      "revenue": 472412.0,
       "returns": 0,
       "delivered": 0,
       "by_color": {
         "graphite": 18,
-        "grey": 35,
+        "grey": 36,
         "brown": 21
       },
       "daily": {
@@ -90,26 +90,26 @@
           }
         },
         "2026-07-15": {
-          "orders": 3,
-          "revenue": 18371.0,
+          "orders": 4,
+          "revenue": 24428.0,
           "returns": 0,
           "delivered": 0,
           "by_color": {
             "graphite": 0,
-            "grey": 2,
+            "grey": 3,
             "brown": 1
           }
         }
       }
     },
     "30d": {
-      "orders": 312,
-      "revenue": 1956122.0,
+      "orders": 313,
+      "revenue": 1962179.0,
       "returns": 0,
       "delivered": 0,
       "by_color": {
         "graphite": 115,
-        "grey": 92,
+        "grey": 93,
         "brown": 105
       },
       "daily": {
@@ -444,244 +444,293 @@
           }
         },
         "2026-07-15": {
-          "orders": 3,
-          "revenue": 18371.0,
+          "orders": 4,
+          "revenue": 24428.0,
           "returns": 0,
           "delivered": 0,
           "by_color": {
             "graphite": 0,
-            "grey": 2,
+            "grey": 3,
             "brown": 1
           }
         }
       }
     },
     "stocks": {
-      "graphite": 156,
+      "graphite": 157,
       "grey": 121,
-      "brown": 113,
-      "total": 390
+      "brown": 114,
+      "total": 392
     },
     "ads": {
       "7d": {
-        "spend": 56150.64,
-        "drr_pct": 12.0,
+        "spend": 73607.8,
+        "drr_pct": 15.6,
         "daily": {
-          "2026-07-08": 5713.69,
-          "2026-07-09": 8708.51,
-          "2026-07-10": 9406.76,
-          "2026-07-11": 10256.66,
-          "2026-07-12": 10337.1,
-          "2026-07-13": 8041.79,
-          "2026-07-14": 3686.13
+          "2026-07-08": 6548.74,
+          "2026-07-09": 9535.5,
+          "2026-07-10": 10230.18,
+          "2026-07-11": 11274.71,
+          "2026-07-12": 11442.81,
+          "2026-07-13": 8950.04,
+          "2026-07-14": 9107.78,
+          "2026-07-15": 6518.04
         },
         "campaigns": [
           {
             "id": "30443185",
             "name": "Поиск средняя стоимость клика",
-            "state": "CAMPAIGN_STATE_RUNNING"
+            "state": "CAMPAIGN_STATE_RUNNING",
+            "spend": 121632.25
           },
           {
             "id": "30044747",
             "name": "Серая 23.06 Авто",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909309",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909308",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909307",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909306",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909305",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909304",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28877150",
             "name": "Вывод в топ",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28832227",
             "name": "Коричневая 06.06",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28832211",
             "name": "Серая 06.06",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28832187",
             "name": "Графит 06.06.",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28827187",
             "name": "Оплата за заказ - все товары",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28796835",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28796834",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28755438",
             "name": "Оплата за заказ: выбранные товары",
-            "state": "CAMPAIGN_STATE_RUNNING"
+            "state": "CAMPAIGN_STATE_RUNNING",
+            "spend": 0.0
           },
           {
             "id": "28755437",
             "name": "Лежанки 3 цвета 05.06",
-            "state": "CAMPAIGN_STATE_RUNNING"
+            "state": "CAMPAIGN_STATE_RUNNING",
+            "spend": 126144.02
           },
           {
             "id": "28686881",
             "name": "Лежанки 05.06.2026",
-            "state": "CAMPAIGN_STATE_RUNNING"
+            "state": "CAMPAIGN_STATE_RUNNING",
+            "spend": 0.0
           }
         ]
       },
       "30d": {
-        "spend": 111780.23,
-        "drr_pct": 5.7,
+        "spend": 247776.27,
+        "drr_pct": 12.6,
         "daily": {
-          "2026-06-26": 1910.07,
-          "2026-06-27": 4169.47,
-          "2026-06-28": 4226.53,
-          "2026-06-29": 3868.19,
-          "2026-06-30": 4083.99,
-          "2026-07-01": 5467.14,
-          "2026-07-02": 5817.83,
-          "2026-07-03": 4755.05,
-          "2026-07-04": 5450.56,
-          "2026-07-05": 5820.82,
-          "2026-07-06": 4432.24,
-          "2026-07-07": 5627.7,
-          "2026-07-08": 5713.69,
-          "2026-07-09": 8708.51,
-          "2026-07-10": 9406.76,
-          "2026-07-11": 10256.66,
-          "2026-07-12": 10337.1,
-          "2026-07-13": 8041.79,
-          "2026-07-14": 3686.13
+          "2026-06-15": 9025.74,
+          "2026-06-16": 8538.15,
+          "2026-06-17": 10852.39,
+          "2026-06-18": 11231.0,
+          "2026-06-19": 9989.83,
+          "2026-06-20": 10155.3,
+          "2026-06-21": 10912.35,
+          "2026-06-22": 9419.12,
+          "2026-06-23": 9706.07,
+          "2026-06-24": 9323.49,
+          "2026-06-25": 10235.54,
+          "2026-06-26": 5562.48,
+          "2026-06-27": 4276.57,
+          "2026-06-28": 4437.27,
+          "2026-06-29": 4274.06,
+          "2026-06-30": 4590.5,
+          "2026-07-01": 5880.96,
+          "2026-07-02": 6297.35,
+          "2026-07-03": 5393.42,
+          "2026-07-04": 5948.77,
+          "2026-07-05": 6433.7,
+          "2026-07-06": 5214.19,
+          "2026-07-07": 6470.22,
+          "2026-07-08": 6548.74,
+          "2026-07-09": 9535.5,
+          "2026-07-10": 10230.18,
+          "2026-07-11": 11274.71,
+          "2026-07-12": 11442.81,
+          "2026-07-13": 8950.04,
+          "2026-07-14": 9107.78,
+          "2026-07-15": 6518.04
         },
         "campaigns": [
           {
             "id": "30443185",
             "name": "Поиск средняя стоимость клика",
-            "state": "CAMPAIGN_STATE_RUNNING"
+            "state": "CAMPAIGN_STATE_RUNNING",
+            "spend": 121632.25
           },
           {
             "id": "30044747",
             "name": "Серая 23.06 Авто",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909309",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909308",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909307",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909306",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909305",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28909304",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28877150",
             "name": "Вывод в топ",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28832227",
             "name": "Коричневая 06.06",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28832211",
             "name": "Серая 06.06",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28832187",
             "name": "Графит 06.06.",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28827187",
             "name": "Оплата за заказ - все товары",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28796835",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28796834",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE"
+            "state": "CAMPAIGN_STATE_INACTIVE",
+            "spend": 0.0
           },
           {
             "id": "28755438",
             "name": "Оплата за заказ: выбранные товары",
-            "state": "CAMPAIGN_STATE_RUNNING"
+            "state": "CAMPAIGN_STATE_RUNNING",
+            "spend": 0.0
           },
           {
             "id": "28755437",
             "name": "Лежанки 3 цвета 05.06",
-            "state": "CAMPAIGN_STATE_RUNNING"
+            "state": "CAMPAIGN_STATE_RUNNING",
+            "spend": 126144.02
           },
           {
             "id": "28686881",
             "name": "Лежанки 05.06.2026",
-            "state": "CAMPAIGN_STATE_RUNNING"
+            "state": "CAMPAIGN_STATE_RUNNING",
+            "spend": 0.0
           }
         ]
       }
