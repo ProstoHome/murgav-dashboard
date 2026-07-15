@@ -1,7 +1,7 @@
 #!/bin/bash
 # МурГав Dashboard — deploy script
-# Запускается по cron каждые 2 часа
-# Вызывает fetcher.py → data.json → git push → Cloudflare Pages обновится
+# Запускается launchd каждые 2 часа (com.aiagent.murgav-dashboard)
+# fetcher.py → data.json → git push → GitHub Pages обновится
 
 set -e
 
@@ -26,8 +26,20 @@ if git -C "$SCRIPT_DIR" diff --quiet data.json; then
 else
   git -C "$SCRIPT_DIR" add data.json
   git -C "$SCRIPT_DIR" commit -m "auto: dashboard data $(date '+%Y-%m-%d %H:%M')"
-  git -C "$SCRIPT_DIR" push origin main
-  echo "✅ Запушено на GitHub"
+  # push с жёстким таймаутом — git push однажды завис >3 мин и завалил задачу
+  git -C "$SCRIPT_DIR" push origin main &
+  PUSH_PID=$!
+  WAITED=0
+  while kill -0 "$PUSH_PID" 2>/dev/null && [ "$WAITED" -lt 60 ]; do
+    sleep 2; WAITED=$((WAITED+2))
+  done
+  if kill -0 "$PUSH_PID" 2>/dev/null; then
+    kill -9 "$PUSH_PID" 2>/dev/null || true
+    echo "⚠️ push завис >60с — прерван, повторится в следующем цикле"
+  else
+    wait "$PUSH_PID" && echo "✅ Запушено на GitHub" \
+      || echo "⚠️ push не прошёл (повторится в следующем цикле)"
+  fi
 fi
 
 echo "=== Готово ==="

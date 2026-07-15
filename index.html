@@ -585,16 +585,18 @@ function renderShipment() {
   }
 
   function renderMpSection(mpKey, mpLabel, accentColor) {
-    const sales7      = d[mpKey]['7d'];
+    const salesP      = d[mpKey][PERIOD];
+    const pDays       = PERIOD === '7d' ? 7 : 30;
+    const pLabel      = PERIOD === '7d' ? '7д' : '30д';
     const stocks      = d[mpKey].stocks;
-    const norm        = normalizeColors(sales7.by_color, sales7.orders);
-    const avgByColor  = Object.fromEntries(colors.map(c => [c, (norm[c] || 0) / 7]));
+    const norm        = normalizeColors(salesP.by_color, salesP.orders);
+    const avgByColor  = Object.fromEntries(colors.map(c => [c, (norm[c] || 0) / pDays]));
     const avgTotal    = colors.reduce((s, c) => s + avgByColor[c], 0);
     const stockTotal  = (stocks.total != null && stocks.total > 0)
                           ? stocks.total
                           : colors.reduce((s, c) => s + (stocks[c] || 0), 0);
 
-    const noOrders = sales7.orders === 0;
+    const noOrders = salesP.orders === 0;
     const noStocks = stockTotal === 0;
 
     const totalCover   = daysCover(stockTotal, avgTotal);
@@ -637,7 +639,7 @@ function renderShipment() {
         <div class="ship-mp-header" style="border-left:3px solid ${accentColor};padding-left:10px;margin-bottom:8px;">
           <span class="ship-mp-label" style="color:${accentColor};">${mpLabel}</span>
           <span class="ship-mp-stats">
-            &nbsp;·&nbsp; Продажи 7д: <b>${sales7.orders} шт</b>
+            &nbsp;·&nbsp; Продажи ${pLabel}: <b>${salesP.orders} шт</b>
             &nbsp;·&nbsp; Ср/сут: <b>${avgTotal > 0 ? avgTotal.toFixed(1) : '—'} шт</b>
             &nbsp;·&nbsp; Хватит: ${daysPill(totalCover)}
             &nbsp;·&nbsp; При ×2: ${daysPill(totalCoverX2)}
@@ -668,7 +670,7 @@ function renderShipment() {
     ${renderMpSection('wb', 'Wildberries', '#a855f7')}
     <div class="ship-note">
       🟢 &gt; 30 дней &nbsp;·&nbsp; 🟡 14–30 дней &nbsp;·&nbsp; 🔴 &lt; 14 дней &nbsp;·&nbsp;
-      Целевой запас: 21 день &nbsp;·&nbsp; «Отгрузить» = сколько нужно отправить сегодня, чтобы выйти на 21д запаса &nbsp;·&nbsp; По продажам последних 7 дней
+      Целевой запас: 21 день &nbsp;·&nbsp; «Отгрузить» = сколько нужно отправить сегодня, чтобы выйти на 21д запаса &nbsp;·&nbsp; По продажам последних ${PERIOD === '7d' ? '7' : '30'} дней
     </div>`;
 }
 
@@ -677,13 +679,13 @@ function renderPurchases(oz, wb) {
   const el = document.getElementById('c-buyout-compact');
   if (!el) return;
 
-  // WB: всегда берём данные из 30д — 7д = 0 из-за лага FBW (товар подтверждается доставленным через несколько дней)
-  const wb30       = DATA.wb['30d'];
-  const wbBuyouts  = wb30.buyouts || null;
+  // WB: берём данные из текущего периода (PERIOD)
+  const wbP        = DATA.wb[PERIOD];
+  const wbBuyouts  = wbP.buyouts || null;
   const wbPurch    = wbBuyouts ? wbBuyouts.count : null;
   const wbBuyRev   = (wbBuyouts && wbBuyouts.revenue > 0) ? wbBuyouts.revenue : null;
-  const wbOrders30 = wb30.orders || 0;
-  const wbBuyPct   = (wbPurch != null && wbOrders30 > 0) ? Math.round(wbPurch / wbOrders30 * 100) : null;
+  const wbOrdersP  = wbP.orders || 0;
+  const wbBuyPct   = (wbPurch != null && wbOrdersP > 0) ? Math.round(wbPurch / wbOrdersP * 100) : null;
 
   // Ozon: Analytics API всегда возвращает returns=0 → % выкупа посчитать невозможно
   // (требует отслеживания статуса «доставлен» vs «заказан» — недоступно в этом API)
@@ -697,9 +699,9 @@ function renderPurchases(oz, wb) {
       const col = wbBuyPct >= 80 ? 'var(--green)' : wbBuyPct >= 60 ? 'var(--yellow)' : 'var(--red)';
       txt += ` · <span style="color:${col};font-weight:700;">${wbBuyPct}%</span>`;
     }
-    wbPart = `<span><span style="font-weight:600;color:#a855f7;">WB</span>&nbsp;· ${txt} <span style="color:var(--muted);font-size:11px;">(30д)</span></span>`;
+    wbPart = `<span><span style="font-weight:600;color:#a855f7;">WB</span>&nbsp;· ${txt} <span style="color:var(--muted);font-size:11px;">(${PERIOD === '7d' ? '7д' : '30д'})</span></span>`;
   } else {
-    wbPart = `<span><span style="font-weight:600;color:#a855f7;">WB</span>&nbsp;· <span style="color:var(--muted);">нет данных</span> <span style="color:var(--muted);font-size:11px;">(FBW лаг)</span></span>`;
+    wbPart = `<span><span style="font-weight:600;color:#a855f7;">WB</span>&nbsp;· <span style="color:var(--muted);">нет данных</span> <span style="color:var(--muted);font-size:11px;">(${PERIOD === '7d' ? '7д' : '30д'})</span></span>`;
   }
 
   el.innerHTML = ozPart + '<span style="color:var(--border);padding:0 4px;">|</span>' + wbPart;
@@ -712,13 +714,27 @@ function renderCamps(elId, camps, spendKey) {
     el.innerHTML = '<li style="color:var(--muted);font-size:12px;">Кампаний нет</li>';
     return;
   }
-  const sorted = [...camps].sort((a, b) => (b.spend || 0) - (a.spend || 0)).slice(0, 5);
-  el.innerHTML = sorted.map(c =>
-    `<li>
-      <span style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.name}</span>
-      <span>${fmtR(c.spend)}</span>
-    </li>`
-  ).join('');
+  const RUNNING = new Set(['CAMPAIGN_STATE_RUNNING', 'RUNNING', 'ACTIVE']);
+  // Keep RUNNING campaigns; also keep paused ones with a name (skip blank inactive)
+  const visible = camps.filter(c => RUNNING.has(c.state) || (c.name && c.name.trim()));
+  if (!visible.length) {
+    el.innerHTML = '<li style="color:var(--muted);font-size:12px;">Нет активных кампаний</li>';
+    return;
+  }
+  const sorted = [...visible].sort((a, b) => (b.spend || 0) - (a.spend || 0)).slice(0, 5);
+  el.innerHTML = sorted.map(c => {
+    const isRunning = RUNNING.has(c.state);
+    const stateIcon = isRunning
+      ? '<span style="color:var(--green);font-size:10px;margin-right:3px;">▶</span>'
+      : '<span style="color:var(--muted);font-size:10px;margin-right:3px;">⏸</span>';
+    const spendTxt = (c.spend != null)
+      ? fmtR(c.spend)
+      : `<span style="color:var(--muted);font-size:11px;">${isRunning ? 'активна' : 'пауза'}</span>`;
+    return `<li>
+      <span style="max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${stateIcon}${c.name || c.id}</span>
+      <span>${spendTxt}</span>
+    </li>`;
+  }).join('');
 }
 
 // ─── Init & auto-refresh ──────────────────────────────────────────────────────
