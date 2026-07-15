@@ -687,9 +687,21 @@ function renderPurchases(oz, wb) {
   const wbOrdersP  = wbP.orders || 0;
   const wbBuyPct   = (wbPurch != null && wbOrdersP > 0) ? Math.round(wbPurch / wbOrdersP * 100) : null;
 
-  // Ozon: Analytics API всегда возвращает returns=0 → % выкупа посчитать невозможно
-  // (требует отслеживания статуса «доставлен» vs «заказан» — недоступно в этом API)
-  const ozPart = `<span><span style="font-weight:600;color:#005BFF;">Ozon</span>&nbsp;· <span style="color:var(--muted);" title="Ozon Analytics API не предоставляет данные о фактических выкупах">н/д</span></span>`;
+  // Ozon: delivered_units = фактические выкупы (доставлено покупателю)
+  const ozDelivered = oz.delivered || 0;
+  const ozOrders    = oz.orders    || 0;
+  const ozBuyPct    = (ozDelivered > 0 && ozOrders > 0) ? Math.round(ozDelivered / ozOrders * 100) : null;
+  let ozPart;
+  if (ozDelivered > 0) {
+    let txt = `<b>${fmt(ozDelivered)} выкупов</b>`;
+    if (ozBuyPct != null) {
+      const col = ozBuyPct >= 80 ? 'var(--green)' : ozBuyPct >= 60 ? 'var(--yellow)' : 'var(--red)';
+      txt += ` · <span style="color:${col};font-weight:700;">${ozBuyPct}%</span>`;
+    }
+    ozPart = `<span><span style="font-weight:600;color:#005BFF;">Ozon</span>&nbsp;· ${txt} <span style="color:var(--muted);font-size:11px;">(${PERIOD === '7d' ? '7д' : '30д'})</span></span>`;
+  } else {
+    ozPart = `<span><span style="font-weight:600;color:#005BFF;">Ozon</span>&nbsp;· <span style="color:var(--muted);" title="delivered_units=0 или данных ещё нет">н/д</span></span>`;
+  }
 
   let wbPart;
   if (wbPurch != null && (wbPurch > 0 || wbBuyRev)) {

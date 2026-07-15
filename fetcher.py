@@ -134,7 +134,7 @@ def fetch_ozon_analytics(date_from: str, date_to: str, sku_map: dict) -> dict:
     body = {
         "date_from": date_from,
         "date_to":   date_to,
-        "metrics":   ["ordered_units", "revenue", "returns"],
+        "metrics":   ["ordered_units", "revenue", "returns", "delivered_units"],
         "dimension": ["sku", "day"],
         "filters":   [],
         "sort":      [{"key": "day", "order": "ASC"}],
@@ -145,7 +145,7 @@ def fetch_ozon_analytics(date_from: str, date_to: str, sku_map: dict) -> dict:
     r.raise_for_status()
     rows = r.json().get("result", {}).get("data", [])
 
-    total    = {"orders": 0, "revenue": 0.0, "returns": 0}
+    total    = {"orders": 0, "revenue": 0.0, "returns": 0, "delivered": 0}
     by_color = {"graphite": 0, "grey": 0, "brown": 0}
     daily    = {}
 
@@ -155,23 +155,26 @@ def fetch_ozon_analytics(date_from: str, date_to: str, sku_map: dict) -> dict:
         day     = dims[1]["id"][:10] if len(dims) > 1 else ""
         if sku_id not in sku_map:
             continue
-        color   = sku_map[sku_id]
-        metrics = row.get("metrics", [])
-        orders  = int(metrics[0]) if len(metrics) > 0 else 0
-        revenue = float(metrics[1]) if len(metrics) > 1 else 0.0
-        returns = int(metrics[2]) if len(metrics) > 2 else 0
+        color     = sku_map[sku_id]
+        metrics   = row.get("metrics", [])
+        orders    = int(metrics[0])   if len(metrics) > 0 else 0
+        revenue   = float(metrics[1]) if len(metrics) > 1 else 0.0
+        returns   = int(metrics[2])   if len(metrics) > 2 else 0
+        delivered = int(metrics[3])   if len(metrics) > 3 else 0
 
-        total["orders"]  += orders
-        total["revenue"] += revenue
-        total["returns"] += returns
+        total["orders"]    += orders
+        total["revenue"]   += revenue
+        total["returns"]   += returns
+        total["delivered"] += delivered
         if color in by_color:
             by_color[color] += orders
         if day:
             if day not in daily:
-                daily[day] = {"orders": 0, "revenue": 0.0, "returns": 0, "by_color": {"graphite": 0, "grey": 0, "brown": 0}}
-            daily[day]["orders"]  += orders
-            daily[day]["revenue"] += revenue
-            daily[day]["returns"] += returns  # Fix БАГ 2: track returns per-day so slice_sales can compute 7d %
+                daily[day] = {"orders": 0, "revenue": 0.0, "returns": 0, "delivered": 0, "by_color": {"graphite": 0, "grey": 0, "brown": 0}}
+            daily[day]["orders"]    += orders
+            daily[day]["revenue"]   += revenue
+            daily[day]["returns"]   += returns  # Fix БАГ 2: track returns per-day so slice_sales can compute 7d %
+            daily[day]["delivered"] += delivered
             if color in daily[day]["by_color"]:
                 daily[day]["by_color"][color] += orders
 
@@ -768,9 +771,10 @@ def slice_sales(full: dict, cutoff: str) -> dict:
     else:
         by_color = full.get("by_color", {"graphite": 0, "grey": 0, "brown": 0})
     # Fix БАГ 2: compute returns from the 7d slice (not from full 30d total)
-    returns  = sum(v.get("returns", 0) for v in daily_sliced.values())
+    returns   = sum(v.get("returns",   0) for v in daily_sliced.values())
+    delivered = sum(v.get("delivered", 0) for v in daily_sliced.values())
     return {
-        "total":    {"orders": orders, "revenue": round(revenue, 2), "returns": returns},
+        "total":    {"orders": orders, "revenue": round(revenue, 2), "returns": returns, "delivered": delivered},
         "by_color": by_color,
         "daily":    daily_sliced,
     }
@@ -897,18 +901,20 @@ def main():
         "updated_at": datetime.now().isoformat(timespec="seconds"),
         "ozon": {
             "7d": {
-                "orders":   ozon_7d["total"]["orders"],
-                "revenue":  round(ozon_7d["total"]["revenue"], 2),
-                "returns":  ozon_7d["total"]["returns"],
-                "by_color": ozon_7d["by_color"],
-                "daily":    ozon_7d["daily"],
+                "orders":    ozon_7d["total"]["orders"],
+                "revenue":   round(ozon_7d["total"]["revenue"], 2),
+                "returns":   ozon_7d["total"]["returns"],
+                "delivered": ozon_7d["total"].get("delivered", 0),
+                "by_color":  ozon_7d["by_color"],
+                "daily":     ozon_7d["daily"],
             },
             "30d": {
-                "orders":   ozon_30d["total"]["orders"],
-                "revenue":  round(ozon_30d["total"]["revenue"], 2),
-                "returns":  ozon_30d["total"]["returns"],
-                "by_color": ozon_30d["by_color"],
-                "daily":    ozon_30d["daily"],
+                "orders":    ozon_30d["total"]["orders"],
+                "revenue":   round(ozon_30d["total"]["revenue"], 2),
+                "returns":   ozon_30d["total"]["returns"],
+                "delivered": ozon_30d["total"].get("delivered", 0),
+                "by_color":  ozon_30d["by_color"],
+                "daily":     ozon_30d["daily"],
             },
             "stocks": ozon_stocks,
             "ads": {
