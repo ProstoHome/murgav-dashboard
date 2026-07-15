@@ -1,28 +1,17 @@
 {
-  "updated_at": "2026-07-15T23:28:24",
+  "updated_at": "2026-07-16T03:30:34",
   "ozon": {
     "7d": {
-      "orders": 79,
-      "revenue": 496624.0,
+      "orders": 70,
+      "revenue": 439411.0,
       "returns": 0,
       "delivered": 0,
       "by_color": {
-        "graphite": 20,
-        "grey": 37,
-        "brown": 22
+        "graphite": 16,
+        "grey": 35,
+        "brown": 19
       },
       "daily": {
-        "2026-07-08": {
-          "orders": 9,
-          "revenue": 57213.0,
-          "returns": 0,
-          "delivered": 0,
-          "by_color": {
-            "graphite": 4,
-            "grey": 2,
-            "brown": 3
-          }
-        },
         "2026-07-09": {
           "orders": 6,
           "revenue": 38142.0,
@@ -103,27 +92,16 @@
       }
     },
     "30d": {
-      "orders": 317,
-      "revenue": 1986391.0,
+      "orders": 301,
+      "revenue": 1886397.0,
       "returns": 0,
       "delivered": 0,
       "by_color": {
-        "graphite": 117,
-        "grey": 94,
-        "brown": 106
+        "graphite": 111,
+        "grey": 85,
+        "brown": 105
       },
       "daily": {
-        "2026-06-15": {
-          "orders": 16,
-          "revenue": 99994.0,
-          "returns": 0,
-          "delivered": 0,
-          "by_color": {
-            "graphite": 6,
-            "grey": 9,
-            "brown": 1
-          }
-        },
         "2026-06-16": {
           "orders": 8,
           "revenue": 50466.0,
@@ -459,15 +437,14 @@
     "stocks": {
       "graphite": 155,
       "grey": 119,
-      "brown": 113,
-      "total": 387
+      "brown": 117,
+      "total": 391
     },
     "ads": {
       "7d": {
-        "spend": 73607.8,
-        "drr_pct": 14.8,
+        "spend": 67059.06,
+        "drr_pct": 15.3,
         "daily": {
-          "2026-07-08": 6548.74,
           "2026-07-09": 9535.5,
           "2026-07-10": 10230.18,
           "2026-07-11": 11274.71,
@@ -589,7 +566,7 @@
       },
       "30d": {
         "spend": 247776.27,
-        "drr_pct": 12.5,
+        "drr_pct": 13.1,
         "daily": {
           "2026-06-15": 9025.74,
           "2026-06-16": 8538.15,
@@ -738,23 +715,14 @@
   },
   "wb": {
     "7d": {
-      "orders": 37,
-      "revenue": 165659.45,
+      "orders": 34,
+      "revenue": 152247.57,
       "by_color": {
         "graphite": 12,
-        "grey": 13,
-        "brown": 12
+        "grey": 11,
+        "brown": 11
       },
       "daily": {
-        "2026-07-08": {
-          "orders": 3,
-          "revenue": 13411.88,
-          "by_color": {
-            "graphite": 0,
-            "grey": 2,
-            "brown": 1
-          }
-        },
         "2026-07-09": {
           "orders": 5,
           "revenue": 22504.68,
