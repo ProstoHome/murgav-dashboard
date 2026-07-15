@@ -1,10 +1,11 @@
 {
-  "updated_at": "2026-07-15T08:56:06",
+  "updated_at": "2026-07-15T10:58:13",
   "ozon": {
     "7d": {
       "orders": 73,
       "revenue": 460298.0,
       "returns": 0,
+      "delivered": 0,
       "by_color": {
         "graphite": 18,
         "grey": 35,
@@ -15,6 +16,7 @@
           "orders": 9,
           "revenue": 57213.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 2,
@@ -25,6 +27,7 @@
           "orders": 6,
           "revenue": 38142.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 0,
             "grey": 4,
@@ -35,6 +38,7 @@
           "orders": 9,
           "revenue": 57213.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 1,
             "grey": 4,
@@ -45,6 +49,7 @@
           "orders": 16,
           "revenue": 101077.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 9,
@@ -55,6 +60,7 @@
           "orders": 10,
           "revenue": 63570.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 3,
             "grey": 4,
@@ -65,6 +71,7 @@
           "orders": 13,
           "revenue": 81625.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 2,
             "grey": 8,
@@ -75,6 +82,7 @@
           "orders": 8,
           "revenue": 49144.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 2,
@@ -85,6 +93,7 @@
           "orders": 2,
           "revenue": 12314.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 0,
             "grey": 2,
@@ -97,6 +106,7 @@
       "orders": 311,
       "revenue": 1950065.0,
       "returns": 0,
+      "delivered": 0,
       "by_color": {
         "graphite": 115,
         "grey": 92,
@@ -107,6 +117,7 @@
           "orders": 16,
           "revenue": 99994.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 6,
             "grey": 9,
@@ -117,6 +128,7 @@
           "orders": 8,
           "revenue": 50466.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 2,
@@ -127,6 +139,7 @@
           "orders": 11,
           "revenue": 68906.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 6,
             "grey": 1,
@@ -137,6 +150,7 @@
           "orders": 20,
           "revenue": 123596.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 7,
             "grey": 11,
@@ -147,6 +161,7 @@
           "orders": 12,
           "revenue": 74693.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 7,
             "grey": 2,
@@ -157,6 +172,7 @@
           "orders": 13,
           "revenue": 79461.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 2,
@@ -167,6 +183,7 @@
           "orders": 9,
           "revenue": 55943.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 0,
             "grey": 1,
@@ -177,6 +194,7 @@
           "orders": 10,
           "revenue": 61343.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 2,
             "grey": 3,
@@ -187,6 +205,7 @@
           "orders": 10,
           "revenue": 61344.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 3,
             "grey": 1,
@@ -197,6 +216,7 @@
           "orders": 9,
           "revenue": 56895.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 3,
             "grey": 3,
@@ -207,6 +227,7 @@
           "orders": 9,
           "revenue": 56578.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 1,
@@ -217,6 +238,7 @@
           "orders": 10,
           "revenue": 62937.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 5,
             "grey": 0,
@@ -227,6 +249,7 @@
           "orders": 12,
           "revenue": 75332.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 5,
@@ -237,6 +260,7 @@
           "orders": 16,
           "revenue": 100122.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 10,
             "grey": 5,
@@ -247,6 +271,7 @@
           "orders": 13,
           "revenue": 82005.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 6,
             "grey": 3,
@@ -257,6 +282,7 @@
           "orders": 6,
           "revenue": 37190.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 2,
             "grey": 2,
@@ -267,6 +293,7 @@
           "orders": 8,
           "revenue": 50540.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 6,
             "grey": 0,
@@ -277,6 +304,7 @@
           "orders": 6,
           "revenue": 38142.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 2,
             "grey": 1,
@@ -287,6 +315,7 @@
           "orders": 8,
           "revenue": 50856.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 2,
@@ -297,6 +326,7 @@
           "orders": 9,
           "revenue": 57213.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 3,
             "grey": 1,
@@ -307,6 +337,7 @@
           "orders": 9,
           "revenue": 57213.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 3,
             "grey": 1,
@@ -317,6 +348,7 @@
           "orders": 7,
           "revenue": 44499.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 2,
             "grey": 1,
@@ -327,6 +359,7 @@
           "orders": 7,
           "revenue": 44499.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 0,
@@ -337,6 +370,7 @@
           "orders": 9,
           "revenue": 57213.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 2,
@@ -347,6 +381,7 @@
           "orders": 6,
           "revenue": 38142.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 0,
             "grey": 4,
@@ -357,6 +392,7 @@
           "orders": 9,
           "revenue": 57213.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 1,
             "grey": 4,
@@ -367,6 +403,7 @@
           "orders": 16,
           "revenue": 101077.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 9,
@@ -377,6 +414,7 @@
           "orders": 10,
           "revenue": 63570.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 3,
             "grey": 4,
@@ -387,6 +425,7 @@
           "orders": 13,
           "revenue": 81625.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 2,
             "grey": 8,
@@ -397,6 +436,7 @@
           "orders": 8,
           "revenue": 49144.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 4,
             "grey": 2,
@@ -407,6 +447,7 @@
           "orders": 2,
           "revenue": 12314.0,
           "returns": 0,
+          "delivered": 0,
           "by_color": {
             "graphite": 0,
             "grey": 2,
