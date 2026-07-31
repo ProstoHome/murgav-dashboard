@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-31T13:24:32",
+  "updated_at": "2026-07-31T15:24:35",
   "ozon": {
     "7d": {
       "orders": 194,
@@ -435,10 +435,10 @@
       }
     },
     "stocks": {
-      "graphite": 205,
-      "grey": 136,
-      "brown": 103,
-      "total": 444
+      "graphite": 200,
+      "grey": 135,
+      "brown": 100,
+      "total": 435
     },
     "ads": {
       "7d": {
