@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-06T08:53:40",
+  "updated_at": "2026-08-06T10:59:59",
   "ozon": {
     "7d": {
       "orders": 136,
@@ -425,28 +425,29 @@
     },
     "stocks": {
       "graphite": 153,
-      "grey": 110,
-      "brown": 65,
-      "total": 328
+      "grey": 108,
+      "brown": 63,
+      "total": 324
     },
     "ads": {
       "7d": {
-        "spend": 70943.97,
-        "drr_pct": 11.6,
+        "spend": 82920.44,
+        "drr_pct": 13.6,
         "daily": {
           "2026-07-30": 12919.95,
           "2026-07-31": 10925.66,
           "2026-08-01": 11037.44,
           "2026-08-02": 12905.74,
           "2026-08-03": 12091.87,
-          "2026-08-04": 11063.31
+          "2026-08-04": 11063.31,
+          "2026-08-05": 11976.47
         },
         "campaigns": [
           {
             "id": "32835874",
             "name": "60*40",
             "state": "CAMPAIGN_STATE_RUNNING",
-            "spend": 100580.11
+            "spend": 105200.27
           },
           {
             "id": "32830240",
@@ -458,7 +459,7 @@
             "id": "30443185",
             "name": "Поиск средняя стоимость клика",
             "state": "CAMPAIGN_STATE_RUNNING",
-            "spend": 210559.39
+            "spend": 210672.19
           },
           {
             "id": "30044747",
@@ -469,37 +470,37 @@
           {
             "id": "28909309",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909308",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909307",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909306",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909305",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909304",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
@@ -535,13 +536,13 @@
           {
             "id": "28796835",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28796834",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
@@ -554,7 +555,7 @@
             "id": "28755437",
             "name": "Лежанки 3 цвета 05.06",
             "state": "CAMPAIGN_STATE_RUNNING",
-            "spend": 49771.35
+            "spend": 51800.67
           },
           {
             "id": "28686881",
@@ -565,10 +566,9 @@
         ]
       },
       "30d": {
-        "spend": 360910.85,
-        "drr_pct": 13.8,
+        "spend": 367673.13,
+        "drr_pct": 14.0,
         "daily": {
-          "2026-07-06": 5214.19,
           "2026-07-07": 6470.22,
           "2026-07-08": 6548.74,
           "2026-07-09": 9535.5,
@@ -597,14 +597,15 @@
           "2026-08-01": 11037.44,
           "2026-08-02": 12905.74,
           "2026-08-03": 12091.87,
-          "2026-08-04": 11063.31
+          "2026-08-04": 11063.31,
+          "2026-08-05": 11976.47
         },
         "campaigns": [
           {
             "id": "32835874",
             "name": "60*40",
             "state": "CAMPAIGN_STATE_RUNNING",
-            "spend": 100580.11
+            "spend": 105200.27
           },
           {
             "id": "32830240",
@@ -616,7 +617,7 @@
             "id": "30443185",
             "name": "Поиск средняя стоимость клика",
             "state": "CAMPAIGN_STATE_RUNNING",
-            "spend": 210559.39
+            "spend": 210672.19
           },
           {
             "id": "30044747",
@@ -627,37 +628,37 @@
           {
             "id": "28909309",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909308",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909307",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909306",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909305",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28909304",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
@@ -693,13 +694,13 @@
           {
             "id": "28796835",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
             "id": "28796834",
             "name": "",
-            "state": "CAMPAIGN_STATE_INACTIVE",
+            "state": "CAMPAIGN_STATE_RUNNING",
             "spend": 0.0
           },
           {
@@ -712,7 +713,7 @@
             "id": "28755437",
             "name": "Лежанки 3 цвета 05.06",
             "state": "CAMPAIGN_STATE_RUNNING",
-            "spend": 49771.35
+            "spend": 51800.67
           },
           {
             "id": "28686881",
