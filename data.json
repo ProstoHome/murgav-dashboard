@@ -1,15 +1,15 @@
 {
-  "updated_at": "2026-08-14T16:10:07",
+  "updated_at": "2026-08-14T18:10:18",
   "ozon": {
     "7d": {
-      "orders": 121,
-      "revenue": 555030.0,
-      "returns": 5,
-      "delivered": 100,
+      "orders": 140,
+      "revenue": 656450.0,
+      "returns": 6,
+      "delivered": 114,
       "by_color": {
-        "graphite": 44,
-        "grey": 44,
-        "brown": 33
+        "graphite": 54,
+        "grey": 49,
+        "brown": 37
       },
       "daily": {
         "2026-08-07": {
@@ -77,31 +77,31 @@
             "grey": 5,
             "brown": 4
           }
+        },
+        "2026-08-13": {
+          "orders": 19,
+          "revenue": 101420.0,
+          "returns": 1,
+          "delivered": 14,
+          "by_color": {
+            "graphite": 10,
+            "grey": 5,
+            "brown": 4
+          }
         }
       }
     },
     "30d": {
-      "orders": 631,
-      "revenue": 2939996.0,
-      "returns": 21,
-      "delivered": 494,
+      "orders": 642,
+      "revenue": 2992272.0,
+      "returns": 22,
+      "delivered": 502,
       "by_color": {
-        "graphite": 202,
-        "grey": 219,
-        "brown": 210
+        "graphite": 208,
+        "grey": 222,
+        "brown": 212
       },
       "daily": {
-        "2026-07-14": {
-          "orders": 8,
-          "revenue": 49144.0,
-          "returns": 0,
-          "delivered": 6,
-          "by_color": {
-            "graphite": 4,
-            "grey": 2,
-            "brown": 2
-          }
-        },
         "2026-07-15": {
           "orders": 8,
           "revenue": 48640.0,
@@ -420,19 +420,30 @@
             "grey": 5,
             "brown": 4
           }
+        },
+        "2026-08-13": {
+          "orders": 19,
+          "revenue": 101420.0,
+          "returns": 1,
+          "delivered": 14,
+          "by_color": {
+            "graphite": 10,
+            "grey": 5,
+            "brown": 4
+          }
         }
       }
     },
     "stocks": {
-      "graphite": 104,
-      "grey": 58,
+      "graphite": 103,
+      "grey": 56,
       "brown": 26,
-      "total": 188
+      "total": 185
     },
     "ads": {
       "7d": {
         "spend": 46512.98,
-        "drr_pct": 8.4,
+        "drr_pct": 7.1,
         "daily": {
           "2026-08-07": 6731.86,
           "2026-08-08": 7221.85,
@@ -567,7 +578,7 @@
       },
       "30d": {
         "spend": 350479.49,
-        "drr_pct": 11.9,
+        "drr_pct": 11.7,
         "daily": {
           "2026-07-15": 10963.55,
           "2026-07-16": 14624.74,
