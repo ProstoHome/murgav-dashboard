@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-15T02:12:53",
+  "updated_at": "2026-08-15T04:15:12",
   "ozon": {
     "7d": {
       "orders": 116,
@@ -976,8 +976,8 @@
         }
       },
       "buyouts": {
-        "count": 0,
-        "revenue": 0.0
+        "count": 6,
+        "revenue": 20309.0
       }
     },
     "stocks": {
