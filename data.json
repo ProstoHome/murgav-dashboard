@@ -1,28 +1,17 @@
 {
-  "updated_at": "2026-08-19T22:02:10",
+  "updated_at": "2026-08-20T00:02:17",
   "ozon": {
     "7d": {
-      "orders": 104,
-      "revenue": 505210.0,
-      "returns": 7,
-      "delivered": 93,
+      "orders": 86,
+      "revenue": 416860.0,
+      "returns": 6,
+      "delivered": 79,
       "by_color": {
-        "graphite": 40,
-        "grey": 31,
-        "brown": 33
+        "graphite": 31,
+        "grey": 26,
+        "brown": 29
       },
       "daily": {
-        "2026-08-12": {
-          "orders": 18,
-          "revenue": 88350.0,
-          "returns": 1,
-          "delivered": 14,
-          "by_color": {
-            "graphite": 9,
-            "grey": 5,
-            "brown": 4
-          }
-        },
         "2026-08-13": {
           "orders": 19,
           "revenue": 101420.0,
@@ -426,15 +415,14 @@
     "stocks": {
       "graphite": 99,
       "grey": 71,
-      "brown": 51,
-      "total": 221
+      "brown": 50,
+      "total": 220
     },
     "ads": {
       "7d": {
-        "spend": 41630.81,
-        "drr_pct": 8.2,
+        "spend": 35818.82,
+        "drr_pct": 8.6,
         "daily": {
-          "2026-08-12": 5811.99,
           "2026-08-13": 6195.44,
           "2026-08-14": 5079.98,
           "2026-08-15": 5401.42,
@@ -727,23 +715,14 @@
   },
   "wb": {
     "7d": {
-      "orders": 104,
-      "revenue": 644089.2,
+      "orders": 92,
+      "revenue": 560615.7,
       "by_color": {
-        "graphite": 28,
-        "grey": 31,
-        "brown": 18
+        "graphite": 25,
+        "grey": 30,
+        "brown": 15
       },
       "daily": {
-        "2026-08-12": {
-          "orders": 12,
-          "revenue": 83473.5,
-          "by_color": {
-            "graphite": 3,
-            "grey": 1,
-            "brown": 3
-          }
-        },
         "2026-08-13": {
           "orders": 13,
           "revenue": 82059.6,
@@ -1160,12 +1139,11 @@
     },
     "ads": {
       "7d": {
-        "spend": 10382.17,
-        "drr_pct": 1.6,
+        "spend": 9588.25,
+        "drr_pct": 1.7,
         "daily": {
           "2026-08-17": 2739.16,
           "2026-08-14": 2869.96,
-          "2026-08-12": 793.92,
           "2026-08-13": 1599.54,
           "2026-08-18": 540.0,
           "2026-08-15": 57.0,
