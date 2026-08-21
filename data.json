@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-22T02:49:13",
+  "updated_at": "2026-08-22T04:51:34",
   "ozon": {
     "7d": {
       "orders": 92,
@@ -726,74 +726,74 @@
   },
   "wb": {
     "7d": {
-      "orders": 64,
-      "revenue": 330502.93,
+      "orders": 90,
+      "revenue": 546851.75,
       "by_color": {
-        "graphite": 17,
-        "grey": 20,
-        "brown": 7
+        "graphite": 26,
+        "grey": 30,
+        "brown": 15
       },
       "daily": {
         "2026-08-15": {
-          "orders": 13,
-          "revenue": 72450.0,
+          "orders": 18,
+          "revenue": 114980.85,
           "by_color": {
-            "graphite": 2,
-            "grey": 2,
-            "brown": 1
+            "graphite": 4,
+            "grey": 3,
+            "brown": 3
           }
         },
         "2026-08-16": {
           "orders": 13,
-          "revenue": 70142.0,
+          "revenue": 93914.25,
           "by_color": {
             "graphite": 6,
-            "grey": 3,
-            "brown": 0
-          }
-        },
-        "2026-08-17": {
-          "orders": 8,
-          "revenue": 32327.0,
-          "by_color": {
-            "graphite": 2,
-            "grey": 4,
+            "grey": 2,
             "brown": 1
           }
         },
-        "2026-08-18": {
-          "orders": 11,
-          "revenue": 56542.0,
+        "2026-08-17": {
+          "orders": 13,
+          "revenue": 79819.2,
           "by_color": {
-            "graphite": 4,
+            "graphite": 1,
+            "grey": 7,
+            "brown": 3
+          }
+        },
+        "2026-08-18": {
+          "orders": 13,
+          "revenue": 83493.0,
+          "by_color": {
+            "graphite": 7,
             "grey": 3,
             "brown": 1
           }
         },
         "2026-08-19": {
-          "orders": 6,
-          "revenue": 33105.0,
+          "orders": 10,
+          "revenue": 54955.8,
           "by_color": {
-            "graphite": 1,
-            "grey": 4,
+            "graphite": 2,
+            "grey": 7,
             "brown": 0
           }
         },
         "2026-08-20": {
-          "orders": 7,
-          "revenue": 30946.93,
+          "orders": 13,
+          "revenue": 66353.8,
           "by_color": {
-            "graphite": 1,
-            "grey": 2,
-            "brown": 2
+            "graphite": 4,
+            "grey": 3,
+            "brown": 5
           }
         },
         "2026-08-21": {
-          "orders": 6,
-          "revenue": 34990.0,
+          "orders": 10,
+          "revenue": 53334.85,
           "by_color": {
-            "graphite": 1,
-            "grey": 2,
+            "graphite": 2,
+            "grey": 5,
             "brown": 2
           }
         }
@@ -804,80 +804,233 @@
       }
     },
     "30d": {
-      "orders": 163,
-      "revenue": 893628.74,
+      "orders": 334,
+      "revenue": 1966361.53,
       "by_color": {
-        "graphite": 30,
-        "grey": 42,
-        "brown": 25
+        "graphite": 71,
+        "grey": 93,
+        "brown": 83
       },
       "daily": {
-        "2026-07-24": {
+        "2026-07-23": {
+          "orders": 6,
+          "revenue": 30578.43,
+          "by_color": {
+            "graphite": 3,
+            "grey": 0,
+            "brown": 2
+          }
+        },
+        "2026-07-21": {
+          "orders": 6,
+          "revenue": 32683.260000000002,
+          "by_color": {
+            "graphite": 2,
+            "grey": 2,
+            "brown": 1
+          }
+        },
+        "2026-07-22": {
           "orders": 3,
-          "revenue": 18408.0,
+          "revenue": 9372.71,
           "by_color": {
             "graphite": 0,
+            "grey": 2,
+            "brown": 1
+          }
+        },
+        "2026-07-24": {
+          "orders": 12,
+          "revenue": 66742.08,
+          "by_color": {
+            "graphite": 1,
+            "grey": 5,
+            "brown": 3
+          }
+        },
+        "2026-07-25": {
+          "orders": 11,
+          "revenue": 58456.8,
+          "by_color": {
+            "graphite": 1,
+            "grey": 3,
+            "brown": 4
+          }
+        },
+        "2026-07-26": {
+          "orders": 5,
+          "revenue": 22277.4,
+          "by_color": {
+            "graphite": 2,
+            "grey": 0,
+            "brown": 3
+          }
+        },
+        "2026-07-27": {
+          "orders": 9,
+          "revenue": 51908.4,
+          "by_color": {
+            "graphite": 2,
+            "grey": 4,
+            "brown": 1
+          }
+        },
+        "2026-07-10": {
+          "orders": 2,
+          "revenue": 9092.8,
+          "by_color": {
+            "graphite": 1,
+            "grey": 0,
+            "brown": 1
+          }
+        },
+        "2026-07-28": {
+          "orders": 10,
+          "revenue": 48010.200000000004,
+          "by_color": {
+            "graphite": 1,
+            "grey": 4,
+            "brown": 5
+          }
+        },
+        "2026-07-29": {
+          "orders": 8,
+          "revenue": 39010.2,
+          "by_color": {
+            "graphite": 2,
+            "grey": 3,
+            "brown": 2
+          }
+        },
+        "2026-07-30": {
+          "orders": 17,
+          "revenue": 102091.8,
+          "by_color": {
+            "graphite": 2,
+            "grey": 0,
+            "brown": 7
+          }
+        },
+        "2026-07-19": {
+          "orders": 1,
+          "revenue": 2498.4,
+          "by_color": {
+            "graphite": 0,
+            "grey": 1,
+            "brown": 0
+          }
+        },
+        "2026-07-31": {
+          "orders": 5,
+          "revenue": 26673.48,
+          "by_color": {
+            "graphite": 2,
             "grey": 0,
             "brown": 0
           }
         },
-        "2026-07-25": {
-          "orders": 3,
-          "revenue": 18281.0,
+        "2026-08-01": {
+          "orders": 7,
+          "revenue": 31891.800000000003,
           "by_color": {
-            "graphite": 0,
-            "grey": 0,
+            "graphite": 1,
+            "grey": 4,
             "brown": 1
           }
         },
         "2026-08-02": {
-          "orders": 3,
-          "revenue": 15349.0,
+          "orders": 10,
+          "revenue": 58748.4,
+          "by_color": {
+            "graphite": 1,
+            "grey": 1,
+            "brown": 4
+          }
+        },
+        "2026-08-03": {
+          "orders": 6,
+          "revenue": 32236.800000000003,
+          "by_color": {
+            "graphite": 2,
+            "grey": 0,
+            "brown": 2
+          }
+        },
+        "2026-08-04": {
+          "orders": 9,
+          "revenue": 32268.600000000002,
+          "by_color": {
+            "graphite": 5,
+            "grey": 2,
+            "brown": 2
+          }
+        },
+        "2026-07-20": {
+          "orders": 1,
+          "revenue": 4603.23,
           "by_color": {
             "graphite": 0,
-            "grey": 0,
+            "grey": 1,
             "brown": 0
+          }
+        },
+        "2026-08-05": {
+          "orders": 5,
+          "revenue": 27611.88,
+          "by_color": {
+            "graphite": 1,
+            "grey": 1,
+            "brown": 1
           }
         },
         "2026-08-06": {
-          "orders": 8,
-          "revenue": 52373.0,
+          "orders": 15,
+          "revenue": 102825.36,
           "by_color": {
-            "graphite": 1,
-            "grey": 2,
-            "brown": 0
+            "graphite": 2,
+            "grey": 4,
+            "brown": 4
           }
         },
         "2026-08-07": {
-          "orders": 4,
-          "revenue": 26630.0,
+          "orders": 5,
+          "revenue": 36360.0,
           "by_color": {
-            "graphite": 0,
-            "grey": 1,
-            "brown": 0
+            "graphite": 1,
+            "grey": 0,
+            "brown": 1
           }
         },
         "2026-08-08": {
-          "orders": 7,
-          "revenue": 65727.6,
+          "orders": 8,
+          "revenue": 68902.5,
           "by_color": {
-            "graphite": 1,
+            "graphite": 0,
             "grey": 1,
-            "brown": 0
+            "brown": 1
           }
         },
         "2026-08-09": {
-          "orders": 8,
-          "revenue": 37838.0,
+          "orders": 11,
+          "revenue": 66939.06,
+          "by_color": {
+            "graphite": 1,
+            "grey": 3,
+            "brown": 3
+          }
+        },
+        "2026-07-18": {
+          "orders": 1,
+          "revenue": 4375.91,
           "by_color": {
             "graphite": 0,
-            "grey": 3,
+            "grey": 0,
             "brown": 1
           }
         },
         "2026-08-10": {
-          "orders": 7,
-          "revenue": 40769.0,
+          "orders": 6,
+          "revenue": 48129.63,
           "by_color": {
             "graphite": 0,
             "grey": 1,
@@ -885,101 +1038,101 @@
           }
         },
         "2026-08-11": {
-          "orders": 11,
-          "revenue": 55769.520000000004,
+          "orders": 14,
+          "revenue": 106323.75,
           "by_color": {
-            "graphite": 3,
-            "grey": 1,
-            "brown": 4
+            "graphite": 1,
+            "grey": 4,
+            "brown": 5
           }
         },
         "2026-08-12": {
-          "orders": 11,
-          "revenue": 84895.69,
+          "orders": 14,
+          "revenue": 90421.5,
           "by_color": {
-            "graphite": 2,
-            "grey": 1,
-            "brown": 3
+            "graphite": 3,
+            "grey": 2,
+            "brown": 4
           }
         },
         "2026-08-13": {
-          "orders": 12,
-          "revenue": 55119.0,
+          "orders": 13,
+          "revenue": 82059.6,
           "by_color": {
             "graphite": 1,
-            "grey": 3,
+            "grey": 4,
             "brown": 4
           }
         },
         "2026-08-14": {
-          "orders": 22,
-          "revenue": 91966.0,
+          "orders": 24,
+          "revenue": 126415.8,
           "by_color": {
-            "graphite": 5,
-            "grey": 9,
+            "graphite": 7,
+            "grey": 11,
             "brown": 4
           }
         },
         "2026-08-15": {
-          "orders": 13,
-          "revenue": 72450.0,
+          "orders": 18,
+          "revenue": 114980.85,
           "by_color": {
-            "graphite": 2,
-            "grey": 2,
-            "brown": 1
+            "graphite": 4,
+            "grey": 3,
+            "brown": 3
           }
         },
         "2026-08-16": {
           "orders": 13,
-          "revenue": 70142.0,
+          "revenue": 93914.25,
           "by_color": {
             "graphite": 6,
-            "grey": 3,
-            "brown": 0
-          }
-        },
-        "2026-08-17": {
-          "orders": 8,
-          "revenue": 32327.0,
-          "by_color": {
-            "graphite": 2,
-            "grey": 4,
+            "grey": 2,
             "brown": 1
           }
         },
-        "2026-08-18": {
-          "orders": 11,
-          "revenue": 56542.0,
+        "2026-08-17": {
+          "orders": 13,
+          "revenue": 79819.2,
           "by_color": {
-            "graphite": 4,
+            "graphite": 1,
+            "grey": 7,
+            "brown": 3
+          }
+        },
+        "2026-08-18": {
+          "orders": 13,
+          "revenue": 83493.0,
+          "by_color": {
+            "graphite": 7,
             "grey": 3,
             "brown": 1
           }
         },
         "2026-08-19": {
-          "orders": 6,
-          "revenue": 33105.0,
+          "orders": 10,
+          "revenue": 54955.8,
           "by_color": {
-            "graphite": 1,
-            "grey": 4,
+            "graphite": 2,
+            "grey": 7,
             "brown": 0
           }
         },
         "2026-08-20": {
-          "orders": 7,
-          "revenue": 30946.93,
+          "orders": 13,
+          "revenue": 66353.8,
           "by_color": {
-            "graphite": 1,
-            "grey": 2,
-            "brown": 2
+            "graphite": 4,
+            "grey": 3,
+            "brown": 5
           }
         },
         "2026-08-21": {
-          "orders": 6,
-          "revenue": 34990.0,
+          "orders": 10,
+          "revenue": 53334.85,
           "by_color": {
-            "graphite": 1,
-            "grey": 2,
+            "graphite": 2,
+            "grey": 5,
             "brown": 2
           }
         }
@@ -998,7 +1151,7 @@
     "ads": {
       "7d": {
         "spend": 8166.75,
-        "drr_pct": 2.5,
+        "drr_pct": 1.5,
         "daily": {
           "2026-08-18": 540.0,
           "2026-08-17": 2739.16,
@@ -1054,7 +1207,7 @@
       },
       "30d": {
         "spend": 11036.71,
-        "drr_pct": 1.2,
+        "drr_pct": 0.6,
         "daily": {
           "2026-08-14": 2869.96,
           "2026-08-18": 540.0,
